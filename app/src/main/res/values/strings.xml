@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">MovieRover</string>
+
+    <!--home screen start-->
+    <string name="disclaimer">Posters are from https://www.movieposters.com</string>
+
+    <string name="btn_menu_text">Menu</string>
+    <string name="btn_starred_text">Starred</string>
+    <string name="btn_watch_later_text">Watch later</string>
+    <string name="btn_picks_text">Picks</string>
+    <string name="btn_settings_text">Settings</string>
+
+    <string name="image_desc1">Poster 1</string>
+    <string name="image_desc2">Poster 2</string>
+    <string name="image_desc3">Poster 3</string>
+    <string name="image_desc4">Poster 4</string>
+    <!--home screen end-->
 </resources>
