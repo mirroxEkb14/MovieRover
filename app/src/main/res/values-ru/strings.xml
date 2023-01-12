@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MovieRover</string>
+    <string name="disclaimer">Постеры предоставлены https://www.movieposters.com</string>
+    <string name="btn_menu_text">Меню</string>
+    <string name="btn_starred_text">Избранное</string>
+    <string name="btn_watch_later_text">Посмотреть позже</string>
+    <string name="btn_picks_text">Подборки</string>
+    <string name="btn_settings_text">Настройки</string>
+    <string name="image_desc1">Постер 1</string>
+    <string name="image_desc2">Постер 2</string>
+    <string name="image_desc3">Постер 3</string>
+    <string name="image_desc4">Постер 4</string>
+</resources>
