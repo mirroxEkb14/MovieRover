@@ -2,17 +2,24 @@
     <string name="app_name">MovieRover</string>
 
     <!--home screen start-->
+    <string name="page_title">Search it!</string>
     <string name="disclaimer">Posters are from https://www.movieposters.com</string>
 
-    <string name="btn_menu_text">Menu</string>
-    <string name="btn_starred_text">Starred</string>
-    <string name="btn_watch_later_text">Watch later</string>
-    <string name="btn_picks_text">Picks</string>
-    <string name="btn_settings_text">Settings</string>
+    <string name="app_bar_layout_text">Someday there will be navigation here…</string>
 
     <string name="image_desc1">Poster 1</string>
     <string name="image_desc2">Poster 2</string>
     <string name="image_desc3">Poster 3</string>
     <string name="image_desc4">Poster 4</string>
+
+    <string name="menu_favorites_title">Starred</string>
+    <string name="menu_watch_later_title">Watch later</string>
+    <string name="menu_picks_title">Picks</string>
+    <string name="menu_search_title">Search</string>
+    <string name="menu_more_title">More</string>
+    
+    <string name="contextual_menu_create_title">Create</string>
+    <string name="contextual_menu_copy_title">Copy</string>
+    <string name="contextual_menu_share_title">Share</string>
     <!--home screen end-->
 </resources>
