@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ios_share"
+        android:title="@string/contextual_menu_ios_share_title"
+        android:icon="@drawable/ic_round_ios_share"/>
+    <item
+        android:id="@+id/file_copy"
+        android:title="@string/contextual_menu_file_copy_title"
+        android:icon="@drawable/ic_round_file_copy"/>
+</menu>

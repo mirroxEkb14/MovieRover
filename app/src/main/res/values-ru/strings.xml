@@ -16,4 +16,6 @@
     <string name="contextual_menu_create_title">Создать</string>
     <string name="contextual_menu_copy_title">Скопировать</string>
     <string name="contextual_menu_share_title">Поделиться</string>
+    <string name="contextual_menu_ios_share_title">Поделиться</string>
+    <string name="contextual_menu_file_copy_title">Скопировать</string>
 </resources>
