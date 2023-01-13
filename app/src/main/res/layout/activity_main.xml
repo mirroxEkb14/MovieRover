@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:layout_weight="1"
-                android:src="@drawable/requiem_for_a_dream"
+                android:src="@drawable/boardwalk_empire"
                 android:contentDescription="@string/image_desc1"/>
 
             <ImageView
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:layout_weight="1"
-                android:src="@drawable/boardwalk_empire"
+                android:src="@drawable/the_curios_case_of_benjamin_button"
                 android:contentDescription="@string/image_desc2"/>
 
             <ImageView
@@ -97,6 +97,94 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_bar"/>
+
+    <GridLayout
+        android:id="@+id/center_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:columnCount="2"
+        android:useDefaultMargins="true"
+        android:layout_margin="16dp"
+        android:layoutAnimation="@anim/layout_anim"
+        app:layout_constraintTop_toBottomOf="@+id/disclaimer"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/center_poster1"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:stateListAnimator="@animator/press_button_animation">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/the_chronicles_of_narnia"
+                android:scaleType="centerCrop"
+                tools:ignore="contentDescription"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/center_poster2"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:stateListAnimator="@animator/press_button_animation">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/requiem_for_a_dream"
+                android:scaleType="centerCrop"
+                tools:ignore="contentDescription"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/center_poster3"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:stateListAnimator="@animator/press_button_animation">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/the_hateful_eight"
+                android:scaleType="centerCrop"
+                tools:ignore="contentDescription"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/center_poster4"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:stateListAnimator="@animator/press_button_animation">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/the_silence_of_the_lambs"
+                android:scaleType="centerCrop"
+                tools:ignore="contentDescription"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

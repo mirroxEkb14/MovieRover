@@ -21,5 +21,8 @@
     <string name="contextual_menu_create_title">Create</string>
     <string name="contextual_menu_copy_title">Copy</string>
     <string name="contextual_menu_share_title">Share</string>
+
+    <string name="contextual_menu_ios_share_title">Share</string>
+    <string name="contextual_menu_file_copy_title">Copy</string>
     <!--home screen end-->
 </resources>
