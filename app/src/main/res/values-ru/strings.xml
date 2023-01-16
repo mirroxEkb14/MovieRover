@@ -2,10 +2,10 @@
 <resources>
     <string name="app_name">MovieRover</string>
     <string name="disclaimer">Постеры предоставлены https://www.movieposters.com</string>
-    <string name="image_desc1">Постер 1</string>
-    <string name="image_desc2">Постер 2</string>
-    <string name="image_desc3">Постер 3</string>
-    <string name="image_desc4">Постер 4</string>
+    <string name="top_bar_image_desc1">Постер 1</string>
+    <string name="top_bar_image_desc2">Постер 2</string>
+    <string name="top_bar_image_desc3">Постер 3</string>
+    <string name="top_bar_image_desc4">Постер 4</string>
     <string name="page_title">Искать!</string>
     <string name="menu_favorites_title">Избранное</string>
     <string name="menu_picks_title">Подборки</string>
@@ -18,4 +18,6 @@
     <string name="contextual_menu_share_title">Поделиться</string>
     <string name="contextual_menu_ios_share_title">Поделиться</string>
     <string name="contextual_menu_file_copy_title">Скопировать</string>
+    <string name="film_item_image_desc">Постер</string>
+    <string name="floating_action_btn_text">Поделиться</string>
 </resources>
