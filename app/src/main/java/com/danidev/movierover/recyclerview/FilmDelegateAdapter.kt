@@ -46,7 +46,7 @@ class FilmDelegateAdapter(private val clickListener: OnItemClickListener) :
     // bind the fields from Film to the View
     override fun onBindViewHolder(item: Film, holder: FilmViewHolder, payloads: MutableList<Any>) {
         holder.bind(item)
-        holder.itemView.findViewById<CardView>(R.id.item_container).setOnClickListener {
+        holder.itemView.findViewById<CardView>(R.id.film_item_container).setOnClickListener {
             clickListener.click(item)
         }
     }

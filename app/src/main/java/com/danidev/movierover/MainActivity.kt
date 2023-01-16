@@ -10,10 +10,9 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.danidev.movierover.model.Ad
-import com.danidev.movierover.model.Film
-import com.danidev.movierover.model.Item
+import com.danidev.movierover.model.*
 import com.danidev.movierover.recyclerview.FilmDelegateAdapter
 import com.danidev.movierover.recyclerview.ItemListRecyclerAdapter
 import com.danidev.movierover.recyclerview.TopSpacingItemDecoration
@@ -53,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.main_recycler).apply {
             filmsAdapter = ItemListRecyclerAdapter(object : FilmDelegateAdapter.OnItemClickListener {
                 override fun click(film: Film) {
+                    Film.currentDetailsPoster = film.poster
                     // launch a new activity
                     val bundle = Bundle()
                     bundle.putParcelable(DetailsActivity.BUNDLE_KEY, film)
@@ -64,6 +64,11 @@ class MainActivity : AppCompatActivity() {
 
             adapter = filmsAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
+
+            recycledViewPool.setMaxRecycledViews(R.id.ad_item_container, 2)
+            recycledViewPool.setMaxRecycledViews(R.id.film_item_container, 8)
+
+            PagerSnapHelper().attachToRecyclerView(this)
 
             val decorator = TopSpacingItemDecoration(8)
             addItemDecoration(decorator)

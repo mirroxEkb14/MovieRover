@@ -13,4 +13,10 @@ data class Film(
     val title: String,
     @DrawableRes val poster: Int, // image id from 'resources'
     val description: String
-): Parcelable, Item
+): Parcelable, Item {
+
+    companion object {
+        // movie poster of RV element that was clicked
+        var currentDetailsPoster: Int? = null
+    }
+}

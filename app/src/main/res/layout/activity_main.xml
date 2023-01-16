@@ -11,6 +11,7 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -108,8 +109,6 @@
         app:layout_constraintTop_toBottomOf="@id/disclaimer"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         tools:listitem="@layout/film_item">
-
-
 
     </androidx.recyclerview.widget.RecyclerView>
 
