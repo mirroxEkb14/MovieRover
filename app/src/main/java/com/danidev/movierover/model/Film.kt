@@ -1,8 +1,16 @@
 package com.danidev.movierover.model
 
+import android.os.Parcelable
+import androidx.annotation.DrawableRes
+import kotlinx.android.parcel.Parcelize
+
+/**
+ * @Parcelize   now we can pass this object to an Activity
+ */
+@Parcelize
 data class Film(
-    val id: Int,
+    override val id: Int,
     val title: String,
-    val poster: Int, // image id from 'resources'
+    @DrawableRes val poster: Int, // image id from 'resources'
     val description: String
-)
+): Parcelable, Item
