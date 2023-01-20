@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.core.view.children
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +19,8 @@ import com.danidev.movierover.model.Item
 import com.danidev.movierover.recyclerview.FilmDelegateAdapter
 import com.danidev.movierover.recyclerview.ItemListRecyclerAdapter
 import com.danidev.movierover.recyclerview.TopSpacingItemDecoration
+import kotlinx.android.synthetic.main.film_item.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
 
@@ -56,7 +61,7 @@ class HomeFragment : Fragment() {
             filmsAdapter = ItemListRecyclerAdapter(object : FilmDelegateAdapter.OnItemClickListener {
                 override fun click(film: Film) {
                     App.currentDetailsPoster = film.poster
-                    (requireActivity() as MainActivity).launchDetailsFragment(film) // launch a new activity
+                    (requireActivity() as MainActivity).launchDetailsFragment(film, findViewById(R.id.poster)) // launch a new activity
                 }
             })
 

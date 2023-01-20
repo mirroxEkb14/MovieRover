@@ -2,13 +2,15 @@ package com.danidev.movierover
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
@@ -21,6 +23,15 @@ import com.google.android.material.snackbar.Snackbar
 class DetailsFragment : Fragment() {
 
     lateinit var film: Film
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        //
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_details, container, false)
@@ -58,10 +69,13 @@ class DetailsFragment : Fragment() {
 
     // get Film from the bundle and set the View according to Film attributes
     private fun acceptDelivery() {
-        film = arguments?.get("film") as Film
+        film = arguments?.get(App.BUNDLE_ITEM_KEY) as Film
 
         view?.findViewById<Toolbar>(R.id.details_toolbar)?.title = film.title
-        view?.findViewById<AppCompatImageView>(R.id.details_poster)?.setImageResource(film.poster)
+        view?.findViewById<ImageView>(R.id.details_poster)?.apply {
+            setImageResource(film.poster)
+            transitionName = arguments?.getString(App.BUNDLE_TRANSITION_KEY)
+        }
         view?.findViewById<TextView>(R.id.details_description)?.text = film.description
     }
 }

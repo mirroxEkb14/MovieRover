@@ -2,17 +2,19 @@ package com.danidev.movierover
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ActionMode
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.TextView
+import android.view.ContextThemeWrapper
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.danidev.movierover.model.Film
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
+
+    // how much time passed from the first click
+    private var backPressedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,15 +34,17 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun launchDetailsFragment(film: Film) {
+    fun launchDetailsFragment(film: Film, imageView: ImageView) {
         val bundle = Bundle() // create a 'parcel'
-        bundle.putParcelable(App.BUNDLE_KEY, film) // put the Film in a 'parcel'
+        bundle.putParcelable(App.BUNDLE_ITEM_KEY, film) // put the Film in a 'parcel'
+        bundle.putString(App.BUNDLE_TRANSITION_KEY, imageView.transitionName) // send transitionName of the current imageView
         val fragment = DetailsFragment() // put DetailsFragment in variable
         fragment.arguments = bundle // attach the 'parcel' to Fragment
 
         // launch the Fragment
         supportFragmentManager
             .beginTransaction()
+            .addSharedElement(imageView, imageView.transitionName)
             .replace(R.id.fragment_placeholder, fragment)
             .addToBackStack(null)
             .commit()
@@ -50,7 +54,21 @@ class MainActivity : AppCompatActivity() {
         fun initTopToolbar() {
             val topAppBar = findViewById<MaterialToolbar>(R.id.topAppBar)
             topAppBar.setNavigationOnClickListener {
-                Toast.makeText(this, resources.getString(R.string.app_bar_layout_text), Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(ContextThemeWrapper(this, R.style.MyDialog)).apply {
+                    setTitle("Welcome to burger menu!")
+                    setMessage(resources.getString(R.string.app_bar_layout_text))
+                    setIcon(R.drawable.ic_round_collections)
+                    setPositiveButton("Ok") { _, _ ->
+                        finish() // close the app
+                    }
+                    setNegativeButton("Back") { _, _ ->
+
+                    }
+                    setNeutralButton("When?") { _, _ ->
+                        Toast.makeText(context, "One day definitely!", Toast.LENGTH_SHORT).show()
+                    }
+                    show()
+                }
             }
             topAppBar.setOnMenuItemClickListener {
                 when (it.itemId) {
@@ -77,6 +95,23 @@ class MainActivity : AppCompatActivity() {
 
         initTopToolbar()
         initBottomNavigation()
+    }
+
+    // double tap for exit the app
+    override fun onBackPressed() {
+        // check if we're in HomeFragment
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            if (backPressedTime + App.TIME_INTERVAL > System.currentTimeMillis()) {
+                super.onBackPressed()
+                finish()
+            } else {
+                Toast.makeText(this, "Double tap for exit", Toast.LENGTH_SHORT).show()
+            }
+            backPressedTime = System.currentTimeMillis()
+
+        } else {
+            super.onBackPressed()
+        }
     }
 
     /*

@@ -26,9 +26,20 @@ class App : Application() {
 
     companion object {
         // a key for launching DetailsFragment
-        const val BUNDLE_KEY = "film"
+        const val BUNDLE_ITEM_KEY = "film"
+
+        // a key for setting transitionName to the poster in DetailsFragment
+        const val BUNDLE_TRANSITION_KEY = "transitionName"
+
+        // during this time a user must click the back button for the second time to exit the app
+        // in ms
+        const val TIME_INTERVAL = 2000
 
         // movie poster of RV element that was clicked
         var currentDetailsPoster: Int? = null
+
+        // represents the amount of elements in the RV
+        // used for setting a different transitionName to each poster in the RV
+        var rvItemsCounter = 1
     }
 }
