@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -60,7 +61,10 @@ class HomeFragment : Fragment() {
 
                     // setup a toolbar for DetailsFragment and launch the fragment
                     (activity as MainActivity).setupDetailsToolbar()
-                    (activity as MainActivity).navController.navigate(R.id.action_homeFragment_to_detailsFragment, getHomeFragmentBundle(film, findViewById(R.id.poster)))
+                    val poster = findViewById<ImageView>(R.id.poster)
+                    val extras = FragmentNavigatorExtras(poster to poster.transitionName)
+                    val argsBundle = getHomeFragmentBundle(film, poster)
+                    (activity as MainActivity).navController.navigate(R.id.action_homeFragment_to_detailsFragment, argsBundle, null, extras)
                 }
             })
 
