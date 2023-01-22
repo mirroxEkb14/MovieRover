@@ -1,11 +1,14 @@
 package com.danidev.movierover
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.danidev.movierover.model.Film
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -40,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         bundle.putString(App.BUNDLE_TRANSITION_KEY, imageView.transitionName) // send transitionName of the current imageView
         val fragment = DetailsFragment() // put DetailsFragment in variable
         fragment.arguments = bundle // attach the 'parcel' to Fragment
+
+        setupDetailsToolbar()
 
         // launch the Fragment
         supportFragmentManager
@@ -97,6 +102,25 @@ class MainActivity : AppCompatActivity() {
         initBottomNavigation()
     }
 
+    private fun setupDetailsToolbar() {
+        findViewById<Toolbar>(R.id.topAppBar).apply {
+            this.navigationIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_round_arrow_back)
+            setSupportActionBar(this) // set the toolbar as a support action bar
+            supportActionBar?.setDisplayHomeAsUpEnabled(true) // now we have a back arrow
+            this.setNavigationOnClickListener {
+                onBackPressed()
+            }
+        }
+    }
+
+    private fun setupHomeToolbar() {
+        findViewById<Toolbar>(R.id.topAppBar).apply {
+            this.navigationIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_round_menu)
+            inflateMenu(R.menu.top_toolbar)
+            initNavigation()
+        }
+    }
+
     // double tap for exit the app
     override fun onBackPressed() {
         // check if we're in HomeFragment
@@ -110,6 +134,7 @@ class MainActivity : AppCompatActivity() {
             backPressedTime = System.currentTimeMillis()
 
         } else {
+            setupHomeToolbar()
             super.onBackPressed()
         }
     }

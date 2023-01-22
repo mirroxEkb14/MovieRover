@@ -19,6 +19,7 @@ import com.danidev.movierover.model.Item
 import com.danidev.movierover.recyclerview.FilmDelegateAdapter
 import com.danidev.movierover.recyclerview.ItemListRecyclerAdapter
 import com.danidev.movierover.recyclerview.TopSpacingItemDecoration
+import com.google.android.material.appbar.MaterialToolbar
 import kotlinx.android.synthetic.main.film_item.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
