@@ -10,7 +10,7 @@
     <string name="menu_favorites_title">Избранное</string>
     <string name="menu_picks_title">Подборки</string>
     <string name="menu_watch_later_title">Посмотреть позже</string>
-    <string name="app_bar_layout_text">Когда-нибудь здесь будет навигация...</string>
+    <string name="app_bar_layout_text">Когда-нибудь здесь будет навигация…</string>
     <string name="menu_search_title">Поиск</string>
     <string name="menu_more_title">Дальше</string>
     <string name="contextual_menu_create_title">Создать</string>
@@ -19,5 +19,6 @@
     <string name="contextual_menu_ios_share_title">Поделиться</string>
     <string name="contextual_menu_file_copy_title">Скопировать</string>
     <string name="film_item_image_desc">Постер</string>
-    <string name="floating_action_btn_text">Поделиться</string>
+    <string name="floating_action_btn_share_text">Поделиться</string>
+    <string name="floating_action_btn_favorites_text">Избранное</string>
 </resources>

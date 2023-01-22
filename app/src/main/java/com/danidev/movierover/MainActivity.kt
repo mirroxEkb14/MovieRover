@@ -64,7 +64,13 @@ class MainActivity : AppCompatActivity() {
             val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
             bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.starred, R.id.watch_later, R.id.picks -> {
+
+                    R.id.starred -> {
+                        setupFavoritesToolbar()
+                        navController.navigate(R.id.action_homeFragment_to_favoritesFragment)
+                        true
+                    }
+                    R.id.watch_later, R.id.picks -> {
                         Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
                         true
                     }
@@ -77,13 +83,26 @@ class MainActivity : AppCompatActivity() {
         initBottomNavigation()
     }
 
+    fun setupFavoritesToolbar() {
+        findViewById<Toolbar>(R.id.topAppBar).apply {
+            this.navigationIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_round_arrow_back)
+            setSupportActionBar(this) // set the toolbar as a support action bar
+            supportActionBar?.setDisplayHomeAsUpEnabled(true) // now we have a back arrow
+            this.setNavigationOnClickListener {
+                setupHomeToolbar()
+                navController.navigate(R.id.action_favoritesFragment_to_homeFragment)
+            }
+        }
+    }
+
     fun setupDetailsToolbar() {
         findViewById<Toolbar>(R.id.topAppBar).apply {
             this.navigationIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_round_arrow_back)
             setSupportActionBar(this) // set the toolbar as a support action bar
             supportActionBar?.setDisplayHomeAsUpEnabled(true) // now we have a back arrow
             this.setNavigationOnClickListener {
-                onBackPressed()
+                setupHomeToolbar()
+                navController.navigate(R.id.action_detailsFragment_to_homeFragment)
             }
         }
     }
@@ -109,8 +128,7 @@ class MainActivity : AppCompatActivity() {
             backPressedTime = System.currentTimeMillis()
 
         } else {
-            setupHomeToolbar()
-            navController.navigate(R.id.action_detailsFragment_to_homeFragment)
+            super.onBackPressed()
         }
     }
 
