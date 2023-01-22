@@ -3,10 +3,12 @@ package com.danidev.movierover
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextThemeWrapper
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.danidev.movierover.model.Film
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import timber.log.Timber
@@ -16,38 +18,16 @@ class MainActivity : AppCompatActivity() {
     // how much time passed from the first click
     private var backPressedTime = 0L
 
+    lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         Timber.d("onCreate()")
 
+        navController = Navigation.findNavController(this, R.id.fragment_placeholder)
         initNavigation()
-        launchHomeFragment()
-    }
-
-    private fun launchHomeFragment() {
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_placeholder, HomeFragment())
-            .addToBackStack(null)
-            .commit()
-    }
-
-    fun launchDetailsFragment(film: Film, imageView: ImageView) {
-        val bundle = Bundle() // create a 'parcel'
-        bundle.putParcelable(App.BUNDLE_ITEM_KEY, film) // put the Film in a 'parcel'
-        bundle.putString(App.BUNDLE_TRANSITION_KEY, imageView.transitionName) // send transitionName of the current imageView
-        val fragment = DetailsFragment() // put DetailsFragment in variable
-        fragment.arguments = bundle // attach the 'parcel' to Fragment
-
-        // launch the Fragment
-        supportFragmentManager
-            .beginTransaction()
-            .addSharedElement(imageView, imageView.transitionName)
-            .replace(R.id.fragment_placeholder, fragment)
-            .addToBackStack(null)
-            .commit()
     }
 
     private fun initNavigation() {
@@ -84,7 +64,13 @@ class MainActivity : AppCompatActivity() {
             val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
             bottomNavigation.setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.starred, R.id.watch_later, R.id.picks -> {
+
+                    R.id.starred -> {
+                        setupFavoritesToolbar()
+                        navController.navigate(R.id.action_homeFragment_to_favoritesFragment)
+                        true
+                    }
+                    R.id.watch_later, R.id.picks -> {
                         Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
                         true
                     }
@@ -95,6 +81,38 @@ class MainActivity : AppCompatActivity() {
 
         initTopToolbar()
         initBottomNavigation()
+    }
+
+    fun setupFavoritesToolbar() {
+        findViewById<Toolbar>(R.id.topAppBar).apply {
+            this.navigationIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_round_arrow_back)
+            setSupportActionBar(this) // set the toolbar as a support action bar
+            supportActionBar?.setDisplayHomeAsUpEnabled(true) // now we have a back arrow
+            this.setNavigationOnClickListener {
+                setupHomeToolbar()
+                navController.navigate(R.id.action_favoritesFragment_to_homeFragment)
+            }
+        }
+    }
+
+    fun setupDetailsToolbar() {
+        findViewById<Toolbar>(R.id.topAppBar).apply {
+            this.navigationIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_round_arrow_back)
+            setSupportActionBar(this) // set the toolbar as a support action bar
+            supportActionBar?.setDisplayHomeAsUpEnabled(true) // now we have a back arrow
+            this.setNavigationOnClickListener {
+                setupHomeToolbar()
+                navController.navigate(R.id.action_detailsFragment_to_homeFragment)
+            }
+        }
+    }
+
+    private fun setupHomeToolbar() {
+        findViewById<MaterialToolbar>(R.id.topAppBar).apply {
+            this.navigationIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_round_menu)
+            inflateMenu(R.menu.top_toolbar)
+            initNavigation()
+        }
     }
 
     // double tap for exit the app

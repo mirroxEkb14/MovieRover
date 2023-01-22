@@ -1,11 +1,13 @@
 package com.danidev.movierover
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -15,10 +17,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
+import androidx.recyclerview.widget.RecyclerView
 import com.danidev.movierover.model.Film
+import com.danidev.movierover.model.Item
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import java.lang.IllegalArgumentException
 
 class DetailsFragment : Fragment() {
 
@@ -27,7 +32,7 @@ class DetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //
+        // handle the transition
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
         }
@@ -58,12 +63,35 @@ class DetailsFragment : Fragment() {
 
     // show a snackbar when pressing on a floating action button
     private fun setFloatingActionBtnSnackbar() {
-        view?.findViewById<FloatingActionButton>(R.id.details_fab_share)?.setOnClickListener {
-            val snackbar = Snackbar.make(requireView().findViewById<CoordinatorLayout>(R.id.details_main_layout), "Snackbar!", Snackbar.LENGTH_SHORT)
-            snackbar.setAction("Action") {
-                Toast.makeText(requireContext(), "Toast!", Toast.LENGTH_SHORT).show()
+        view?.findViewById<FloatingActionButton>(R.id.details_fab_favorites)?.apply {
+            setImageResource (
+                if (film.isInFavorites) R.drawable.ic_round_favorite
+                else R.drawable.ic_round_favorite_border
+            )
+            setOnClickListener {
+                if (!film.isInFavorites) {
+                    // add a movie to RV
+                    FavoritesFragment.favoritesFilmBase.add(film)
+
+                    this.setImageResource(R.drawable.ic_round_favorite)
+                    film.isInFavorites = true
+                } else {
+                    this.setImageResource(R.drawable.ic_round_favorite_border)
+                    film.isInFavorites = false
+                }
             }
-            snackbar.show()
+        }
+
+        view?.findViewById<FloatingActionButton>(R.id.details_fab_share)?.setOnClickListener {
+            Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    "Check out this film: ${film.title} \n\n ${film.description}"
+                )
+                type = "text/plain"
+                startActivity(Intent.createChooser(this, "Share To:"))
+            }
         }
     }
 

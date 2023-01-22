@@ -46,6 +46,19 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/details_fab_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:borderWidth="0dp"
+        android:backgroundTint="@color/purple_500"
+        app:layout_anchor="@id/details_app_bar"
+        app:layout_anchorGravity="left|bottom"
+        app:srcCompat="@drawable/ic_round_favorite_border"
+        app:tint="@android:color/white"
+        android:contentDescription="@string/floating_action_btn_favorites_text"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/details_fab_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +68,7 @@
         app:layout_anchorGravity="bottom|right"
         app:srcCompat="@drawable/ic_round_share"
         app:tint="@color/white"
-        android:contentDescription="@string/floating_action_btn_text"/>
+        android:contentDescription="@string/floating_action_btn_share_text"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
