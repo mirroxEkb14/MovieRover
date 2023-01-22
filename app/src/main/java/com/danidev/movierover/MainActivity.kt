@@ -77,11 +77,6 @@ class MainActivity : AppCompatActivity() {
         initBottomNavigation()
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.top_toolbar, menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
-
     fun setupDetailsToolbar() {
         findViewById<Toolbar>(R.id.topAppBar).apply {
             this.navigationIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_round_arrow_back)
@@ -114,8 +109,8 @@ class MainActivity : AppCompatActivity() {
             backPressedTime = System.currentTimeMillis()
 
         } else {
-            this@MainActivity.navController.popBackStack()
             setupHomeToolbar()
+            navController.navigate(R.id.action_detailsFragment_to_homeFragment)
         }
     }
 
