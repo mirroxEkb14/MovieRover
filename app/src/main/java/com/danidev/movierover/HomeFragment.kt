@@ -8,8 +8,6 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
-import androidx.core.view.children
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -19,9 +17,6 @@ import com.danidev.movierover.model.Item
 import com.danidev.movierover.recyclerview.FilmDelegateAdapter
 import com.danidev.movierover.recyclerview.ItemListRecyclerAdapter
 import com.danidev.movierover.recyclerview.TopSpacingItemDecoration
-import com.google.android.material.appbar.MaterialToolbar
-import kotlinx.android.synthetic.main.film_item.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
 
@@ -62,7 +57,10 @@ class HomeFragment : Fragment() {
             filmsAdapter = ItemListRecyclerAdapter(object : FilmDelegateAdapter.OnItemClickListener {
                 override fun click(film: Film) {
                     App.currentDetailsPoster = film.poster
-                    (requireActivity() as MainActivity).launchDetailsFragment(film, findViewById(R.id.poster)) // launch a new activity
+
+                    // setup a toolbar for DetailsFragment and launch the fragment
+                    (activity as MainActivity).setupDetailsToolbar()
+                    (activity as MainActivity).navController.navigate(R.id.action_homeFragment_to_detailsFragment, getHomeFragmentBundle(film, findViewById(R.id.poster)))
                 }
             })
 
@@ -82,6 +80,19 @@ class HomeFragment : Fragment() {
             scheduleLayoutAnimation()
         }
         filmsAdapter.items = filmsDataBase
+    }
+
+    /**
+     * Create a bundle that contains information about the movie the user clicked on
+     *
+     * @param film          Film instance from RV
+     * @param imageView     Film poster
+     */
+    fun getHomeFragmentBundle(film: Film, imageView: ImageView): Bundle {
+        return Bundle().apply {
+            putParcelable(App.BUNDLE_ITEM_KEY, film) // put the Film in a 'parcel'
+            putString(App.BUNDLE_TRANSITION_KEY, imageView.transitionName) // send transitionName of the current imageView
+        }
     }
 
     private fun setContextualTopAppbar() {

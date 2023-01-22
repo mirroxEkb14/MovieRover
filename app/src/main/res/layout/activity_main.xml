@@ -26,10 +26,13 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
+    <fragment
         android:id="@+id/fragment_placeholder"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation"
         app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"/>
 
