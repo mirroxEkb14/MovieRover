@@ -20,6 +20,7 @@ class FavoritesFragment : Fragment() {
 
     companion object {
         var favoritesFilmBase: ArrayList<Item> = arrayListOf()
+        var saveFavoritesPositionLast = 0
     }
 
     override fun onCreateView(
@@ -46,6 +47,8 @@ class FavoritesFragment : Fragment() {
             adapter = filmsAdapter
             layoutManager = LinearLayoutManager(requireActivity())
 
+            scrollToPosition(saveFavoritesPositionLast)
+
             val anim = AnimationUtils.loadLayoutAnimation(requireActivity(), R.anim.recyclerview_favorites_layout_animator)
             layoutAnimation = anim
             scheduleLayoutAnimation()
@@ -54,5 +57,11 @@ class FavoritesFragment : Fragment() {
             addItemDecoration(decorator)
         }
         filmsAdapter.items = favoritesFilmBase
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // save the element position from RV
+        saveFavoritesPositionLast = (view?.findViewById<RecyclerView>(R.id.favorites_recycler)?.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
     }
 }
