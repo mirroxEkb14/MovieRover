@@ -3,14 +3,8 @@
 
     <!--home screen start-->
     <string name="page_title">Search it!</string>
-    <string name="disclaimer">Posters are from https://www.movieposters.com</string>
 
     <string name="app_bar_layout_text">Someday there will be a navigation here…</string>
-
-    <string name="top_bar_image_desc1">Poster 1</string>
-    <string name="top_bar_image_desc2">Poster 2</string>
-    <string name="top_bar_image_desc3">Poster 3</string>
-    <string name="top_bar_image_desc4">Poster 4</string>
 
     <string name="film_item_image_desc">Poster</string>
 
@@ -19,13 +13,6 @@
     <string name="menu_picks_title">Picks</string>
     <string name="menu_search_title">Search</string>
     <string name="menu_more_title">More</string>
-
-    <string name="contextual_menu_create_title">Create</string>
-    <string name="contextual_menu_copy_title">Copy</string>
-    <string name="contextual_menu_share_title">Share</string>
-
-    <string name="contextual_menu_ios_share_title">Share</string>
-    <string name="contextual_menu_file_copy_title">Copy</string>
 
     <string name="floating_action_btn_share_text">Share</string>
     <string name="floating_action_btn_favorites_text">Favorites</string>
