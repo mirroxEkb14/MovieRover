@@ -24,12 +24,15 @@ class ItemListRecyclerAdapter(clickListener: FilmDelegateAdapter.OnItemClickList
             super.items = newList // set a new list
             diffResult.dispatchUpdatesTo(this) // the data changed in Adapter
         }
-//        updateData(items as ArrayList<Item>)
+        updateData(items as ArrayList<Item>)
+    }
 
-        fun updateDataInefficient() {
-            super.items = items
-            notifyDataSetChanged()
-        }
-        updateDataInefficient()
+    /**
+     * Updates all the elements from the RV
+     * @param items     a new list of Films
+     */
+    fun updateDataInefficient(items: List<Item>) {
+        super.items = items
+        notifyDataSetChanged()
     }
 }

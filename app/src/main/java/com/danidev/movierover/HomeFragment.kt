@@ -94,13 +94,13 @@ class HomeFragment : Fragment() {
                 }
                 override fun onQueryTextChange(newText: String?): Boolean {
                     if (newText!!.isEmpty()) {
-                        filmsAdapter.items = filmsDataBase
+                        filmsAdapter.updateDataInefficient(filmsDataBase)
                         return true
                     }
                     val result = filmsDataBase.filter {
-                        it is Film && it.title.toLowerCase(Locale.getDefault()).contains(newText.lowercase(Locale.getDefault()))
+                        it is Film && it.title.lowercase(Locale.getDefault()).contains(newText.lowercase(Locale.getDefault()))
                     }
-                    filmsAdapter.items = result
+                    filmsAdapter.updateDataInefficient(result)
                     return true
                 }
             })
