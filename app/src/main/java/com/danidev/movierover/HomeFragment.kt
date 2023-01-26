@@ -1,27 +1,26 @@
 package com.danidev.movierover
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.danidev.movierover.model.Ad
-import com.danidev.movierover.model.Film
-import com.danidev.movierover.model.Item
+import com.danidev.movierover.model.*
 import com.danidev.movierover.recyclerview.FilmDelegateAdapter
 import com.danidev.movierover.recyclerview.ItemListRecyclerAdapter
 import com.danidev.movierover.recyclerview.TopSpacingItemDecoration
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
 
     private lateinit var filmsAdapter: ItemListRecyclerAdapter
+    private lateinit var filmsDataBase: ArrayList<Item>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +33,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
-        setContextualTopAppbar()
+        setupSearchView()
     }
 
     private fun initRecyclerView() {
@@ -53,7 +52,7 @@ class HomeFragment : Fragment() {
             )
         }
 
-        val filmsDataBase = getFilms()
+        filmsDataBase = getFilms()
         view?.findViewById<RecyclerView>(R.id.main_recycler)?.apply {
             filmsAdapter = ItemListRecyclerAdapter(object : FilmDelegateAdapter.OnItemClickListener {
                 override fun click(film: Film) {
@@ -86,6 +85,28 @@ class HomeFragment : Fragment() {
         filmsAdapter.items = filmsDataBase
     }
 
+    private fun setupSearchView() {
+        view?.findViewById<SearchView>(R.id.search_view).apply {
+            this?.isIconified = false // now the user can click everywhere in SearchView, not only on the lope
+            this?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText!!.isEmpty()) {
+                        filmsAdapter.updateDataInefficient(filmsDataBase)
+                        return true
+                    }
+                    val result = filmsDataBase.filter {
+                        it is Film && it.title.lowercase(Locale.getDefault()).contains(newText.lowercase(Locale.getDefault()))
+                    }
+                    filmsAdapter.updateDataInefficient(result)
+                    return true
+                }
+            })
+        }
+    }
+
     /**
      * Create a bundle that contains information about the movie the user clicked on
      *
@@ -96,43 +117,6 @@ class HomeFragment : Fragment() {
         return Bundle().apply {
             putParcelable(App.BUNDLE_ITEM_KEY, film) // put the Film in a 'parcel'
             putString(App.BUNDLE_TRANSITION_KEY, imageView.transitionName) // send transitionName of the current imageView
-        }
-    }
-
-    private fun setContextualTopAppbar() {
-        var actionMode: ActionMode? = null
-
-        val disclaimerText = view?.findViewById<TextView>(R.id.disclaimer)
-        disclaimerText?.setOnLongClickListener {
-            when (actionMode == null) {
-                true -> {
-                    actionMode = (context as Activity).startActionMode(object: ActionMode.Callback {
-                        override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-                            when (item?.itemId) {
-                                R.id.create, R.id.copy, R.id.share -> Toast.makeText(requireContext(), item.title, Toast.LENGTH_SHORT).show()
-                            }
-                            return true
-                        }
-
-                        override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                            val inflater = mode?.menuInflater
-                            inflater?.inflate(R.menu.contextual_top_toolbar, menu)
-                            mode?.title = "Select Option"
-                            return true
-                        }
-
-                        override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                            return false
-                        }
-
-                        override fun onDestroyActionMode(mode: ActionMode?) {
-                            actionMode = null
-                        }
-                    })
-                    return@setOnLongClickListener false
-                }
-                false -> return@setOnLongClickListener true
-            }
         }
     }
 }

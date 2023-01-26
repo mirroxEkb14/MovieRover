@@ -19,4 +19,8 @@
         <item name="android:background">@color/purple_500</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+    <style name="Theme.MyApp" parent="Theme.MovieRover">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 </resources>

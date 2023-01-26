@@ -26,4 +26,13 @@ class ItemListRecyclerAdapter(clickListener: FilmDelegateAdapter.OnItemClickList
         }
         updateData(items as ArrayList<Item>)
     }
+
+    /**
+     * Updates all the elements from the RV
+     * @param items     a new list of Films
+     */
+    fun updateDataInefficient(items: List<Item>) {
+        super.items = items
+        notifyDataSetChanged()
+    }
 }
