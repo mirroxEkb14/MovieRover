@@ -31,11 +31,13 @@ class FilmDelegateAdapter(private val clickListener: OnItemClickListener) :
         // put the data from Film object to our View (film_item.xml)
         fun bind(film: Film) {
             title.text = film.title
-            Glide.with(itemView)
-                .load(film.poster)
-                .centerCrop()
-                .into(poster)
-            poster.transitionName = App.BUNDLE_TRANSITION_KEY + App.rvItemsCounter
+            poster.apply {
+                Glide.with(itemView)
+                    .load(film.poster)
+                    .centerCrop()
+                    .into(this)
+                transitionName = App.BUNDLE_TRANSITION_KEY + App.rvItemsCounter
+            }
             description.text = film.description
 
             App.rvItemsCounter += 1

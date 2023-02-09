@@ -18,6 +18,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.danidev.movierover.model.Film
 import com.danidev.movierover.model.Item
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -101,7 +102,10 @@ class DetailsFragment : Fragment() {
 
         view?.findViewById<Toolbar>(R.id.details_toolbar)?.title = film.title
         view?.findViewById<ImageView>(R.id.details_poster)?.apply {
-            setImageResource(film.poster)
+            Glide.with(requireView())
+                .load(film.poster)
+                .centerCrop()
+                .into(this)
             transitionName = arguments?.getString(App.BUNDLE_TRANSITION_KEY)
         }
         view?.findViewById<TextView>(R.id.details_description)?.text = film.description
