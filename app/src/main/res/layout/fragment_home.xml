@@ -7,6 +7,4 @@
     android:fitsSystemWindows="false"
     tools:context=".HomeFragment">
 
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
