@@ -1,16 +1,15 @@
 package com.danidev.movierover
 
 import android.os.Bundle
-import android.transition.Scene
-import android.transition.Slide
-import android.transition.TransitionManager
-import android.transition.TransitionSet
+import android.transition.*
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.cardview.widget.CardView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.children
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -80,9 +79,9 @@ class HomeFragment : Fragment() {
 
                     // setup a toolbar for DetailsFragment and launch the fragment
                     (activity as MainActivity).setupDetailsToolbar()
-                    val poster = findViewById<ImageView>(R.id.poster)
-                    val extras = FragmentNavigatorExtras(poster to poster.transitionName)
-                    val argsBundle = getHomeFragmentBundle(film, poster)
+                    val filmContainer = findViewById<CardView>(R.id.film_item_container)
+                    val extras = FragmentNavigatorExtras(filmContainer to filmContainer.transitionName)
+                    val argsBundle = getHomeFragmentBundle(film, filmContainer)
                     (activity as MainActivity).navController.navigate(R.id.action_homeFragment_to_detailsFragment, argsBundle, null, extras)
                 }
             })
@@ -127,13 +126,13 @@ class HomeFragment : Fragment() {
     /**
      * Create a bundle that contains information about the movie user clicked on
      *
-     * @param film          Film instance from RV
-     * @param imageView     Film poster
+     * @param film              Film instance from RV
+     * @param filmContainer     Film container
      */
-    fun getHomeFragmentBundle(film: Film, imageView: ImageView): Bundle {
+    fun getHomeFragmentBundle(film: Film, filmContainer: CardView): Bundle {
         return Bundle().apply {
             putParcelable(App.BUNDLE_ITEM_KEY, film) // put the Film in a 'parcel'
-            putString(App.BUNDLE_TRANSITION_KEY, imageView.transitionName) // send transitionName of the current imageView
+            putString(App.BUNDLE_TRANSITION_KEY, filmContainer.transitionName) // send transitionName of the current imageView
         }
     }
 }

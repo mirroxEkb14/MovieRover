@@ -27,6 +27,7 @@ class FilmDelegateAdapter(private val clickListener: OnItemClickListener) :
         private val title = itemView.findViewById<TextView>(R.id.title)
         private val poster = itemView.findViewById<ImageView>(R.id.poster)
         private val description = itemView.findViewById<TextView>(R.id.description)
+        private val filmContainer = itemView.findViewById<CardView>(R.id.film_item_container)
 
         // put the data from Film object to our View (film_item.xml)
         fun bind(film: Film) {
@@ -36,8 +37,8 @@ class FilmDelegateAdapter(private val clickListener: OnItemClickListener) :
                     .load(film.poster)
                     .centerCrop()
                     .into(this)
-                transitionName = App.BUNDLE_TRANSITION_KEY + App.rvItemsCounter
             }
+            filmContainer.transitionName = App.BUNDLE_TRANSITION_KEY + App.rvItemsCounter
             description.text = film.description
 
             App.rvItemsCounter += 1
