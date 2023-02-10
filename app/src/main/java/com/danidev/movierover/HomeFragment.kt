@@ -1,11 +1,15 @@
 package com.danidev.movierover
 
 import android.os.Bundle
+import android.transition.*
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.cardview.widget.CardView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.children
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -32,8 +36,23 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initHomeScene()
         initRecyclerView()
         setupSearchView()
+    }
+
+    private fun initHomeScene() {
+        val homeSceneRoot = requireView().findViewById<CoordinatorLayout>(R.id.home_fragment_root)
+        val scene = Scene.getSceneForLayout(homeSceneRoot, R.layout.merge_home_screen_content, requireContext())
+
+        val searchSlide = Slide(Gravity.TOP).addTarget(R.id.home_app_bar)
+        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(R.id.main_recycler)
+        val customTransition = TransitionSet().apply {
+            duration = 500
+            addTransition(recyclerSlide)
+            addTransition(searchSlide)
+        }
+        TransitionManager.go(scene, customTransition) // launch the home xml file as a scene
     }
 
     private fun initRecyclerView() {
@@ -60,9 +79,9 @@ class HomeFragment : Fragment() {
 
                     // setup a toolbar for DetailsFragment and launch the fragment
                     (activity as MainActivity).setupDetailsToolbar()
-                    val poster = findViewById<ImageView>(R.id.poster)
-                    val extras = FragmentNavigatorExtras(poster to poster.transitionName)
-                    val argsBundle = getHomeFragmentBundle(film, poster)
+                    val filmContainer = findViewById<CardView>(R.id.film_item_container)
+                    val extras = FragmentNavigatorExtras(filmContainer to filmContainer.transitionName)
+                    val argsBundle = getHomeFragmentBundle(film, filmContainer)
                     (activity as MainActivity).navController.navigate(R.id.action_homeFragment_to_detailsFragment, argsBundle, null, extras)
                 }
             })
@@ -77,10 +96,6 @@ class HomeFragment : Fragment() {
 
             val decorator = TopSpacingItemDecoration(8)
             addItemDecoration(decorator)
-
-            val anim = AnimationUtils.loadLayoutAnimation(requireActivity(), R.anim.recyclerview_layout_animator)
-            layoutAnimation = anim
-            scheduleLayoutAnimation()
         }
         filmsAdapter.items = filmsDataBase
     }
@@ -88,6 +103,7 @@ class HomeFragment : Fragment() {
     private fun setupSearchView() {
         view?.findViewById<SearchView>(R.id.search_view).apply {
             this?.isIconified = false // now the user can click everywhere in SearchView, not only on the lope
+            this?.clearFocus() // the keyboard not to pop up automatically at the app start
             this?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return true
@@ -108,15 +124,15 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * Create a bundle that contains information about the movie the user clicked on
+     * Create a bundle that contains information about the movie user clicked on
      *
-     * @param film          Film instance from RV
-     * @param imageView     Film poster
+     * @param film              Film instance from RV
+     * @param filmContainer     Film container
      */
-    fun getHomeFragmentBundle(film: Film, imageView: ImageView): Bundle {
+    fun getHomeFragmentBundle(film: Film, filmContainer: CardView): Bundle {
         return Bundle().apply {
             putParcelable(App.BUNDLE_ITEM_KEY, film) // put the Film in a 'parcel'
-            putString(App.BUNDLE_TRANSITION_KEY, imageView.transitionName) // send transitionName of the current imageView
+            putString(App.BUNDLE_TRANSITION_KEY, filmContainer.transitionName) // send transitionName of the current imageView
         }
     }
 }

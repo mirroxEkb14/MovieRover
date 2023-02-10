@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         initBottomNavigation()
     }
 
-    fun setupFavoritesToolbar() {
+    private fun setupFavoritesToolbar() {
         findViewById<Toolbar>(R.id.topAppBar).apply {
             this.navigationIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_round_arrow_back)
             setSupportActionBar(this) // set the toolbar as a support action bar

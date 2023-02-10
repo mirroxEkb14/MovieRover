@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.danidev.movierover.App
 import com.danidev.movierover.R
 import com.danidev.movierover.model.Film
@@ -26,14 +27,18 @@ class FilmDelegateAdapter(private val clickListener: OnItemClickListener) :
         private val title = itemView.findViewById<TextView>(R.id.title)
         private val poster = itemView.findViewById<ImageView>(R.id.poster)
         private val description = itemView.findViewById<TextView>(R.id.description)
+        private val filmContainer = itemView.findViewById<CardView>(R.id.film_item_container)
 
         // put the data from Film object to our View (film_item.xml)
         fun bind(film: Film) {
             title.text = film.title
             poster.apply {
-                setImageResource(film.poster)
-                transitionName = App.BUNDLE_TRANSITION_KEY + App.rvItemsCounter
+                Glide.with(itemView)
+                    .load(film.poster)
+                    .centerCrop()
+                    .into(this)
             }
+            filmContainer.transitionName = App.BUNDLE_TRANSITION_KEY + App.rvItemsCounter
             description.text = film.description
 
             App.rvItemsCounter += 1

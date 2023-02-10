@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.transition.AutoTransition
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.Menu
@@ -14,10 +15,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.danidev.movierover.model.Film
 import com.danidev.movierover.model.Item
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -34,7 +37,7 @@ class DetailsFragment : Fragment() {
 
         // handle the transition
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+            sharedElementEnterTransition = AutoTransition().setDuration(800L)
         }
     }
 
@@ -101,9 +104,12 @@ class DetailsFragment : Fragment() {
 
         view?.findViewById<Toolbar>(R.id.details_toolbar)?.title = film.title
         view?.findViewById<ImageView>(R.id.details_poster)?.apply {
-            setImageResource(film.poster)
-            transitionName = arguments?.getString(App.BUNDLE_TRANSITION_KEY)
+            Glide.with(requireView())
+                .load(film.poster)
+                .centerCrop()
+                .into(this)
         }
+        view?.findViewById<CoordinatorLayout>(R.id.details_main_layout)?.transitionName = arguments?.getString(App.BUNDLE_TRANSITION_KEY)
         view?.findViewById<TextView>(R.id.details_description)?.text = film.description
     }
 }
