@@ -6,27 +6,22 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.transition.AutoTransition
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.widget.Toolbar
-import androidx.cardview.widget.CardView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.danidev.movierover.model.Film
-import com.danidev.movierover.model.Item
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import java.lang.IllegalArgumentException
 
 class DetailsFragment : Fragment() {
 
@@ -41,7 +36,10 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_details, container, false)
     }
 
@@ -74,7 +72,7 @@ class DetailsFragment : Fragment() {
             setOnClickListener {
                 if (!film.isInFavorites) {
                     // add a movie to RV
-                    FavoritesFragment.favoritesFilmBase.add(film)
+                    StarredFragment.favoritesFilmBase.add(film)
 
                     this.setImageResource(R.drawable.ic_round_favorite)
                     film.isInFavorites = true

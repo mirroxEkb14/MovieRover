@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.danidev.movierover.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
@@ -19,17 +19,26 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/action_homeFragment_to_favoritesFragment"
-            app:destination="@id/favoritesFragment"
+            android:id="@+id/action_homeFragment_to_picksFragment"
+            app:destination="@id/picksFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_watchLaterFragment"
+            app:destination="@id/watchLaterFragment" />
+        <action
+            android:id="@+id/action_homeFragment_self"
+            app:destination="@id/homeFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_starredFragment"
+            app:destination="@id/starredFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.danidev.movierover.DetailsFragment"
-        android:label="fragment_details"
+        android:label="@string/menu_details_title"
         tools:layout="@layout/fragment_details" >
         <action
             android:id="@+id/action_detailsFragment_to_homeFragment"
@@ -37,15 +46,66 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/starredFragment"
+        android:name="com.danidev.movierover.StarredFragment"
+        android:label="@string/menu_starred_title"
+        tools:layout="@layout/fragment_starred">
+        <action
+            android:id="@+id/action_starredFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_starredFragment_self"
+            app:destination="@id/starredFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_starredFragment_to_watchLaterFragment"
+            app:destination="@id/watchLaterFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_starredFragment_to_picksFragment"
+            app:destination="@id/picksFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/picksFragment"
+        android:name="com.danidev.movierover.PicksFragment"
+        android:label="@string/menu_picks_title"
+        tools:layout="@layout/fragment_picks" >
+        <action
+            android:id="@+id/action_picksFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="com.danidev.movierover.FavoritesFragment"
-        android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" >
+        android:id="@+id/watchLaterFragment"
+        android:name="com.danidev.movierover.WatchLaterFragment"
+        android:label="@string/menu_watch_later_title"
+        tools:layout="@layout/fragment_watch_later" >
         <action
-            android:id="@+id/action_favoritesFragment_to_homeFragment"
+            android:id="@+id/action_watchLaterFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"

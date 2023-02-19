@@ -2,18 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/starred"
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_round_home"
+        android:title="@string/menu_home"/>
+    <item
+        android:id="@+id/starredFragment"
         android:icon="@drawable/ic_round_favorite"
-        android:title="@string/menu_favorites_title"
-        app:showAsAction="withText"/>
+        android:title="@string/menu_starred_title"/>
     <item
-        android:id="@+id/watch_later"
+        android:id="@+id/watchLaterFragment"
         android:icon="@drawable/ic_round_watch_later"
-        android:title="@string/menu_watch_later_title"
-        app:showAsAction="withText"/>
+        android:title="@string/menu_watch_later_title"/>
     <item
-        android:id="@+id/picks"
+        android:id="@+id/picksFragment"
         android:icon="@drawable/ic_round_video_library"
-        android:title="@string/menu_picks_title"
-        app:showAsAction="withText"/>
+        android:title="@string/menu_picks_title"/>
 </menu>

@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">MovieRover</string>
     <string name="page_title">Искать!</string>
-    <string name="menu_favorites_title">Избранное</string>
     <string name="menu_picks_title">Подборки</string>
     <string name="menu_watch_later_title">Посмотреть позже</string>
     <string name="app_bar_layout_text">Когда-нибудь здесь будет навигация…</string>
@@ -11,4 +10,7 @@
     <string name="film_item_image_desc">Постер</string>
     <string name="floating_action_btn_share_text">Поделиться</string>
     <string name="floating_action_btn_favorites_text">Избранное</string>
+    <string name="menu_home">Домой</string>
+    <string name="menu_details_title">Подробнее</string>
+    <string name="menu_starred_title">Избранное</string>
 </resources>

@@ -1,15 +1,14 @@
 package com.danidev.movierover
 
 import android.os.Bundle
-import android.transition.*
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
+import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.children
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -26,6 +25,13 @@ class HomeFragment : Fragment() {
     private lateinit var filmsAdapter: ItemListRecyclerAdapter
     private lateinit var filmsDataBase: ArrayList<Item>
 
+    // how much time passed from the first click
+    private var backPressedTime = 0L
+
+    companion object {
+        var saveHomePositionLast = 0
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,26 +39,17 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        onBackPressedCallback()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initHomeScene()
         initRecyclerView()
         setupSearchView()
-    }
-
-    private fun initHomeScene() {
-        val homeSceneRoot = requireView().findViewById<CoordinatorLayout>(R.id.home_fragment_root)
-        val scene = Scene.getSceneForLayout(homeSceneRoot, R.layout.merge_home_screen_content, requireContext())
-
-        val searchSlide = Slide(Gravity.TOP).addTarget(R.id.home_app_bar)
-        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(R.id.main_recycler)
-        val customTransition = TransitionSet().apply {
-            duration = 500
-            addTransition(recyclerSlide)
-            addTransition(searchSlide)
-        }
-        TransitionManager.go(scene, customTransition) // launch the home xml file as a scene
     }
 
     private fun initRecyclerView() {
@@ -91,6 +88,8 @@ class HomeFragment : Fragment() {
 
             recycledViewPool.setMaxRecycledViews(R.id.ad_item_container, 2)
             recycledViewPool.setMaxRecycledViews(R.id.film_item_container, 8)
+
+            scrollToPosition(saveHomePositionLast)
 
             PagerSnapHelper().attachToRecyclerView(this)
 
@@ -134,5 +133,24 @@ class HomeFragment : Fragment() {
             putParcelable(App.BUNDLE_ITEM_KEY, film) // put the Film in a 'parcel'
             putString(App.BUNDLE_TRANSITION_KEY, filmContainer.transitionName) // send transitionName of the current imageView
         }
+    }
+
+    // double tap for exit the app
+    private fun onBackPressedCallback() {
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            if (backPressedTime + App.TIME_INTERVAL > System.currentTimeMillis()) {
+                isEnabled = false
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            } else {
+                Toast.makeText(requireActivity(), "Double tap for exit", Toast.LENGTH_SHORT).show()
+            }
+            backPressedTime = System.currentTimeMillis()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // save the element position from RV
+        saveHomePositionLast = (view?.findViewById<RecyclerView>(R.id.main_recycler)?.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
     }
 }
