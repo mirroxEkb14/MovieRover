@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,7 @@ class StarredFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initFavoritesRecyclerView()
+        animateFragmentAppearance()
     }
 
     private fun initFavoritesRecyclerView() {
@@ -57,6 +59,12 @@ class StarredFragment : Fragment() {
             addItemDecoration(decorator)
         }
         filmsAdapter.items = favoritesFilmBase
+    }
+
+    private fun animateFragmentAppearance() {
+        val starredFragmentRoot = requireView().findViewById<FrameLayout>(R.id.starred_fragment_root)
+        println(starredFragmentRoot)
+        AnimationHelper.performFragmentCircularRevealAnimation(starredFragmentRoot, requireActivity(), 2)
     }
 
     override fun onPause() {

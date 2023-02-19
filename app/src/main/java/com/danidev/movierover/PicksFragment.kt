@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 
 class PicksFragment : Fragment() {
 
@@ -18,5 +19,12 @@ class PicksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        animateFragmentAppearance()
+    }
+
+    private fun animateFragmentAppearance() {
+        val picksFragmentRoot = requireView().findViewById<FrameLayout>(R.id.picks_fragment_root)
+        AnimationHelper.performFragmentCircularRevealAnimation(picksFragmentRoot, requireActivity(), 4)
     }
 }

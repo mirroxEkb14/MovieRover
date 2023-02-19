@@ -8,6 +8,7 @@ import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,6 +51,7 @@ class HomeFragment : Fragment() {
 
         initRecyclerView()
         setupSearchView()
+        animateFragmentAppearance()
     }
 
     private fun initRecyclerView() {
@@ -133,6 +135,11 @@ class HomeFragment : Fragment() {
             putParcelable(App.BUNDLE_ITEM_KEY, film) // put the Film in a 'parcel'
             putString(App.BUNDLE_TRANSITION_KEY, filmContainer.transitionName) // send transitionName of the current imageView
         }
+    }
+
+    private fun animateFragmentAppearance() {
+        val homeFragmentRoot = requireView().findViewById<CoordinatorLayout>(R.id.home_fragment_root)
+        AnimationHelper.performFragmentCircularRevealAnimation(homeFragmentRoot, requireActivity(), 1)
     }
 
     // double tap for exit the app

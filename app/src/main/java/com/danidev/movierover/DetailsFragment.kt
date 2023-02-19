@@ -9,13 +9,11 @@ import android.transition.AutoTransition
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.addCallback
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
@@ -107,7 +105,7 @@ class DetailsFragment : Fragment() {
                 .centerCrop()
                 .into(this)
         }
-        view?.findViewById<CoordinatorLayout>(R.id.details_main_layout)?.transitionName = arguments?.getString(App.BUNDLE_TRANSITION_KEY)
+        view?.findViewById<CoordinatorLayout>(R.id.details_fragment_root)?.transitionName = arguments?.getString(App.BUNDLE_TRANSITION_KEY)
         view?.findViewById<TextView>(R.id.details_description)?.text = film.description
     }
 }

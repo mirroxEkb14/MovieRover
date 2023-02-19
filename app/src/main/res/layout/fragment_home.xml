@@ -10,6 +10,7 @@ tools:visibility="visible" -> visible in this file for refactoring
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
     android:background="@drawable/home_background"
+    android:visibility="invisible"
     tools:visibility="visible"
     tools:context=".HomeFragment">
 
