@@ -6,10 +6,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -18,6 +16,8 @@ import com.danidev.movierover.model.*
 import com.danidev.movierover.recyclerview.FilmDelegateAdapter
 import com.danidev.movierover.recyclerview.ItemListRecyclerAdapter
 import com.danidev.movierover.recyclerview.TopSpacingItemDecoration
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -49,6 +49,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showNavigation()
         initRecyclerView()
         setupSearchView()
         animateFragmentAppearance()
@@ -153,6 +154,12 @@ class HomeFragment : Fragment() {
             }
             backPressedTime = System.currentTimeMillis()
         }
+    }
+
+    // set the visibility of Toolbar and BottomNavigation to VISIBLE after Splash Screen
+    private fun showNavigation() {
+        MainActivity.activityInstance.findViewById<AppBarLayout>(R.id.app_bar_layout).visibility = View.VISIBLE
+        MainActivity.activityInstance.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
     }
 
     override fun onPause() {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
@@ -12,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
@@ -21,6 +23,11 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var navController: NavController
 
+    // an activity instance used to get access to its variables from fragments
+    companion object {
+        lateinit var activityInstance: MainActivity
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         navController = Navigation.findNavController(this, R.id.fragment_placeholder)
         setupNavigation()
+        activityInstance = this
     }
 
     fun setupDetailsToolbar() {
