@@ -29,10 +29,6 @@ class HomeFragment : Fragment() {
     // how much time passed from the first click
     private var backPressedTime = 0L
 
-    companion object {
-        var saveHomePositionLast = 0
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -166,5 +162,9 @@ class HomeFragment : Fragment() {
         super.onPause()
         // save the element position from RV
         saveHomePositionLast = (view?.findViewById<RecyclerView>(R.id.main_recycler)?.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+    }
+
+    companion object {
+        var saveHomePositionLast = 0
     }
 }

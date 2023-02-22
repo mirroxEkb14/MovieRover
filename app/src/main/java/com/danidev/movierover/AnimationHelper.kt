@@ -15,7 +15,7 @@ import kotlin.math.roundToInt
 object AnimationHelper {
 
     // a variable for the circle of appearance differs from the icon of the navigation menu
-    private const val menuItems = 4
+    private const val MENU_ITEMS = 4
 
     /**
      * @param rootView  Is a container and an animation object at the same time
@@ -33,7 +33,7 @@ object AnimationHelper {
                     // return to the main thread to perform the animation
                     activity.runOnUiThread {
                         // some maths for calculation of the animation start
-                        val itemCenter = rootView.width / (menuItems * 2)
+                        val itemCenter = rootView.width / (MENU_ITEMS * 2)
                         val step = (itemCenter * 2) * (position - 1) + itemCenter
 
                         val x: Int = step
