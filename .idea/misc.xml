@@ -17,8 +17,11 @@
         <entry key="..\:/Users/user/MovieRover/app/src/main/res/menu/navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/MovieRover/app/src/main/res/menu/top_app_bar.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/MovieRover/app/src/main/res/menu/top_toolbar.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/activity_background.xml" value="0.1885" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/background_search_view.xml" value="0.1885" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/corner_background.xml" value="0.1885" />
+        <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/details_background.xml" value="0.1885" />
+        <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/home_background.xml" value="0.1885" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/ic_baseline_content_copy.xml" value="0.2045" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/ic_baseline_content_copy_24.xml" value="0.2045" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/ic_round_create.xml" value="0.2045" />
@@ -26,6 +29,9 @@
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/ic_round_ios_share.xml" value="0.2045" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/ic_round_share.xml" value="0.2045" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/ic_round_share_24.xml" value="0.2045" />
+        <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/picks_background.xml" value="0.1885" />
+        <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/starred_background.xml" value="0.1885" />
+        <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/drawable/watchlater_backbround.xml" value="0.1885" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/activity_details.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/ad_item.xml" value="0.25416666666666665" />
@@ -33,6 +39,10 @@
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/fragment_details.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/fragment_favorites.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/fragment_picks.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/fragment_splash_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/fragment_starred.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/fragment_watch_later.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/layout/merge_home_screen_content.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/menu/contextual_top_toolbar.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/Projects/Android/MovieRover/app/src/main/res/menu/details_top_toolbar.xml" value="0.25416666666666665" />

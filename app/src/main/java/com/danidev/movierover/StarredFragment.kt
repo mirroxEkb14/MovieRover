@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,13 +15,13 @@ import com.danidev.movierover.recyclerview.FilmDelegateAdapter
 import com.danidev.movierover.recyclerview.ItemListRecyclerAdapter
 import com.danidev.movierover.recyclerview.TopSpacingItemDecoration
 
-class FavoritesFragment : Fragment() {
+class StarredFragment : Fragment() {
 
     private lateinit var filmsAdapter: ItemListRecyclerAdapter
 
     companion object {
         var favoritesFilmBase: ArrayList<Item> = arrayListOf()
-        var saveFavoritesPositionLast = 0
+        var saveStarredPositionLast = 0
     }
 
     override fun onCreateView(
@@ -28,26 +29,27 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
+        return inflater.inflate(R.layout.fragment_starred, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initFavoritesRecyclerView()
+        animateFragmentAppearance()
     }
 
     private fun initFavoritesRecyclerView() {
         view?.findViewById<RecyclerView>(R.id.favorites_recycler)?.apply {
             filmsAdapter = ItemListRecyclerAdapter(object : FilmDelegateAdapter.OnItemClickListener {
                 override fun click(film: Film) {
-                    // no logic when clicking on RV films in FavoritesFragment
+                    // no logic when clicking on RV films in StarredFragment
                 }
             })
 
             adapter = filmsAdapter
             layoutManager = LinearLayoutManager(requireActivity())
 
-            scrollToPosition(saveFavoritesPositionLast)
+            scrollToPosition(saveStarredPositionLast)
 
             val anim = AnimationUtils.loadLayoutAnimation(requireActivity(), R.anim.recyclerview_favorites_layout_animator)
             layoutAnimation = anim
@@ -59,9 +61,15 @@ class FavoritesFragment : Fragment() {
         filmsAdapter.items = favoritesFilmBase
     }
 
+    private fun animateFragmentAppearance() {
+        val starredFragmentRoot = requireView().findViewById<FrameLayout>(R.id.starred_fragment_root)
+        println(starredFragmentRoot)
+        AnimationHelper.performFragmentCircularRevealAnimation(starredFragmentRoot, requireActivity(), 2)
+    }
+
     override fun onPause() {
         super.onPause()
         // save the element position from RV
-        saveFavoritesPositionLast = (view?.findViewById<RecyclerView>(R.id.favorites_recycler)?.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+        saveStarredPositionLast = (view?.findViewById<RecyclerView>(R.id.favorites_recycler)?.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
     }
 }

@@ -1,15 +1,13 @@
 package com.danidev.movierover
 
 import android.os.Bundle
-import android.transition.*
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
+import androidx.activity.addCallback
 import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.children
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -18,6 +16,8 @@ import com.danidev.movierover.model.*
 import com.danidev.movierover.recyclerview.FilmDelegateAdapter
 import com.danidev.movierover.recyclerview.ItemListRecyclerAdapter
 import com.danidev.movierover.recyclerview.TopSpacingItemDecoration
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -26,6 +26,9 @@ class HomeFragment : Fragment() {
     private lateinit var filmsAdapter: ItemListRecyclerAdapter
     private lateinit var filmsDataBase: ArrayList<Item>
 
+    // how much time passed from the first click
+    private var backPressedTime = 0L
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,26 +36,19 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        onBackPressedCallback()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initHomeScene()
+        showNavigation()
         initRecyclerView()
         setupSearchView()
-    }
-
-    private fun initHomeScene() {
-        val homeSceneRoot = requireView().findViewById<CoordinatorLayout>(R.id.home_fragment_root)
-        val scene = Scene.getSceneForLayout(homeSceneRoot, R.layout.merge_home_screen_content, requireContext())
-
-        val searchSlide = Slide(Gravity.TOP).addTarget(R.id.home_app_bar)
-        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(R.id.main_recycler)
-        val customTransition = TransitionSet().apply {
-            duration = 500
-            addTransition(recyclerSlide)
-            addTransition(searchSlide)
-        }
-        TransitionManager.go(scene, customTransition) // launch the home xml file as a scene
+        animateFragmentAppearance()
     }
 
     private fun initRecyclerView() {
@@ -91,6 +87,8 @@ class HomeFragment : Fragment() {
 
             recycledViewPool.setMaxRecycledViews(R.id.ad_item_container, 2)
             recycledViewPool.setMaxRecycledViews(R.id.film_item_container, 8)
+
+            scrollToPosition(saveHomePositionLast)
 
             PagerSnapHelper().attachToRecyclerView(this)
 
@@ -134,5 +132,39 @@ class HomeFragment : Fragment() {
             putParcelable(App.BUNDLE_ITEM_KEY, film) // put the Film in a 'parcel'
             putString(App.BUNDLE_TRANSITION_KEY, filmContainer.transitionName) // send transitionName of the current imageView
         }
+    }
+
+    private fun animateFragmentAppearance() {
+        val homeFragmentRoot = requireView().findViewById<CoordinatorLayout>(R.id.home_fragment_root)
+        AnimationHelper.performFragmentCircularRevealAnimation(homeFragmentRoot, requireActivity(), 1)
+    }
+
+    // double tap for exit the app
+    private fun onBackPressedCallback() {
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            if (backPressedTime + App.TIME_INTERVAL > System.currentTimeMillis()) {
+                isEnabled = false
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            } else {
+                Toast.makeText(requireActivity(), "Double tap for exit", Toast.LENGTH_SHORT).show()
+            }
+            backPressedTime = System.currentTimeMillis()
+        }
+    }
+
+    // set the visibility of Toolbar and BottomNavigation to VISIBLE after Splash Screen
+    private fun showNavigation() {
+        MainActivity.activityInstance.findViewById<AppBarLayout>(R.id.app_bar_layout).visibility = View.VISIBLE
+        MainActivity.activityInstance.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // save the element position from RV
+        saveHomePositionLast = (view?.findViewById<RecyclerView>(R.id.main_recycler)?.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+    }
+
+    companion object {
+        var saveHomePositionLast = 0
     }
 }
