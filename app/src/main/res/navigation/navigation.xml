@@ -6,7 +6,7 @@
     app:startDestination="@id/splashScreenFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.danidev.movierover.HomeFragment"
+        android:name="com.danidev.movierover.fragments.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.danidev.movierover.DetailsFragment"
+        android:name="com.danidev.movierover.fragments.DetailsFragment"
         android:label="@string/menu_details_title"
         tools:layout="@layout/fragment_details" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/starredFragment"
-        android:name="com.danidev.movierover.StarredFragment"
+        android:name="com.danidev.movierover.fragments.StarredFragment"
         android:label="@string/menu_starred_title"
         tools:layout="@layout/fragment_starred">
         <action
@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/picksFragment"
-        android:name="com.danidev.movierover.PicksFragment"
+        android:name="com.danidev.movierover.fragments.PicksFragment"
         android:label="@string/menu_picks_title"
         tools:layout="@layout/fragment_picks" >
         <action
@@ -101,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/watchLaterFragment"
-        android:name="com.danidev.movierover.WatchLaterFragment"
+        android:name="com.danidev.movierover.fragments.WatchLaterFragment"
         android:label="@string/menu_watch_later_title"
         tools:layout="@layout/fragment_watch_later" >
         <action
@@ -114,7 +114,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.danidev.movierover.SplashScreenFragment"
+        android:name="com.danidev.movierover.fragments.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action

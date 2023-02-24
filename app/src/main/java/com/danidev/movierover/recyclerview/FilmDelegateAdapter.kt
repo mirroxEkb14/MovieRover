@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.danidev.movierover.App
 import com.danidev.movierover.R
+import com.danidev.movierover.customs.RatingDonutView
 import com.danidev.movierover.model.Film
 import com.danidev.movierover.model.Item
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
@@ -28,6 +29,7 @@ class FilmDelegateAdapter(private val clickListener: OnItemClickListener) :
         private val poster = itemView.findViewById<ImageView>(R.id.poster)
         private val description = itemView.findViewById<TextView>(R.id.description)
         private val filmContainer = itemView.findViewById<CardView>(R.id.film_item_container)
+        private val ratingDonut = itemView.findViewById<RatingDonutView>(R.id.rating_donut)
 
         // put the data from Film object to our View (film_item.xml)
         fun bind(film: Film) {
@@ -40,6 +42,7 @@ class FilmDelegateAdapter(private val clickListener: OnItemClickListener) :
             }
             filmContainer.transitionName = App.BUNDLE_TRANSITION_KEY + App.rvItemsCounter
             description.text = film.description
+            ratingDonut.setProgress((film.rating * 10).toInt())
 
             App.rvItemsCounter += 1
         }

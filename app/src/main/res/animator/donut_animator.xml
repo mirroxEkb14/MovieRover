@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Animation for RatingDonutView -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <set>
+            <objectAnimator
+                android:propertyName="alpha"
+                android:duration="1000"
+                android:valueFrom="0f"
+                android:valueTo="1f"/>
+            <objectAnimator
+                android:propertyName="rotation"
+                android:duration="1000"
+                android:valueFrom="0"
+                android:valueTo="360"
+                android:valueType="floatType"/>
+        </set>
+    </item>
+</selector>

@@ -1,4 +1,4 @@
-package com.danidev.movierover
+package com.danidev.movierover.fragments
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.danidev.movierover.R
 
 class SplashScreenFragment : Fragment() {
 

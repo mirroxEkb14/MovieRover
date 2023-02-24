@@ -1,4 +1,4 @@
-package com.danidev.movierover
+package com.danidev.movierover.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.danidev.movierover.customs.AnimationHelper
+import com.danidev.movierover.R
 import com.danidev.movierover.model.Film
 import com.danidev.movierover.model.Item
 import com.danidev.movierover.recyclerview.FilmDelegateAdapter
@@ -51,7 +53,9 @@ class StarredFragment : Fragment() {
 
             scrollToPosition(saveStarredPositionLast)
 
-            val anim = AnimationUtils.loadLayoutAnimation(requireActivity(), R.anim.recyclerview_favorites_layout_animator)
+            val anim = AnimationUtils.loadLayoutAnimation(requireActivity(),
+                R.anim.recyclerview_favorites_layout_animator
+            )
             layoutAnimation = anim
             scheduleLayoutAnimation()
 
@@ -64,7 +68,11 @@ class StarredFragment : Fragment() {
     private fun animateFragmentAppearance() {
         val starredFragmentRoot = requireView().findViewById<FrameLayout>(R.id.starred_fragment_root)
         println(starredFragmentRoot)
-        AnimationHelper.performFragmentCircularRevealAnimation(starredFragmentRoot, requireActivity(), 2)
+        AnimationHelper.performFragmentCircularRevealAnimation(
+            starredFragmentRoot,
+            requireActivity(),
+            2
+        )
     }
 
     override fun onPause() {
