@@ -89,14 +89,14 @@ class HomeFragment : Fragment() {
             adapter = filmsAdapter
             layoutManager = LinearLayoutManager(requireActivity())
 
-            recycledViewPool.setMaxRecycledViews(R.id.ad_item_container, 2)
-            recycledViewPool.setMaxRecycledViews(R.id.film_item_container, 8)
+            recycledViewPool.setMaxRecycledViews(R.id.ad_item_container, RV_MAX_AD_ITEMS)
+            recycledViewPool.setMaxRecycledViews(R.id.film_item_container, RV_MAX_FILM_ITEMS)
 
             scrollToPosition(saveHomePositionLast)
 
             PagerSnapHelper().attachToRecyclerView(this)
 
-            val decorator = TopSpacingItemDecoration(8)
+            val decorator = TopSpacingItemDecoration(RV_DECORATOR_SPACING)
             addItemDecoration(decorator)
         }
         filmsAdapter.items = filmsDataBase
@@ -143,7 +143,7 @@ class HomeFragment : Fragment() {
         AnimationHelper.performFragmentCircularRevealAnimation(
             homeFragmentRoot,
             requireActivity(),
-            1
+            HOME_FRAGMENT_POSITION
         )
     }
 
@@ -173,6 +173,12 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
+        private const val RV_MAX_AD_ITEMS = 2
+        private const val RV_MAX_FILM_ITEMS = 8
+        private const val RV_DECORATOR_SPACING = 8
+
+        private const val HOME_FRAGMENT_POSITION = 1
+
         var saveHomePositionLast = 0
     }
 }

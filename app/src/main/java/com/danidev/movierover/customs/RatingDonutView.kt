@@ -33,7 +33,7 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
      */
     init {
         // get the attributes and set it according to the fields
-        val a = context.theme.obtainStyledAttributes(attributeSet, R.styleable.RatingDonutView, 0, 0)
+        val a = context.theme.obtainStyledAttributes(attributeSet, R.styleable.RatingDonutView, DEFAULT_DEF_STYLE_ATTRIBUTE, DEFAULT_DEF_STYLE_RESOURCE)
         try {
             stroke = a.getFloat(R.styleable.RatingDonutView_stroke, stroke)
             progress = a.getInt(R.styleable.RatingDonutView_progress, progress)
@@ -49,9 +49,9 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
      */
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         radius = if (width > height) {
-            height.div(2f)
+            height.div(DEFAULT_SIZE_DIVIDER)
         } else {
-            width.div(2f)
+            width.div(DEFAULT_SIZE_DIVIDER)
         }
     }
 
@@ -69,8 +69,8 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
         val chosenHeight = chooseDimension(heightMode, heightSize)
 
         val minSide = Math.min(chosenWidth, chosenHeight)
-        centerX = minSide.div(2f)
-        centerY = minSide.div(2f)
+        centerX = minSide.div(DEFAULT_SIZE_DIVIDER)
+        centerY = minSide.div(DEFAULT_SIZE_DIVIDER)
 
         setMeasuredDimension(minSide, minSide)
     }
@@ -81,7 +81,7 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
     private fun chooseDimension(mode: Int, size: Int) =
         when (mode) {
             MeasureSpec.AT_MOST, MeasureSpec.EXACTLY -> size
-            else -> 300
+            else -> UNSPECIFIED_MEASURE_DIMENSION
     }
 
     /**
@@ -107,11 +107,11 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
         // move zero coordinates of the canvas to the center (it's easier to draw round objects)
         canvas.translate(centerX, centerY)
         // set the size for the oval
-        oval.set(0f - scale, 0f - scale, scale , scale)
+        oval.set(DEFAULT_OVAL_LEFT_COORDINATE - scale, DEFAULT_OVAL_TOP_COORDINATE - scale, scale , scale)
         // draw background (it is advisable to draw it once in bitmap because it is static)
-        canvas.drawCircle(0f, 0f, radius, circlePaint)
+        canvas.drawCircle(DEFAULT_CENTER_CIRCLE_COORDINATE_X, DEFAULT_CENTER_CIRCLE_COORDINATE_Y, radius, circlePaint)
         // draw the "arcs" from which the ring will consist
-        canvas.drawArc(oval, -90f, convertProgressToDegrees(progress), false, strokePaint)
+        canvas.drawArc(oval, ARC_STARTING_ANGLE, convertProgressToDegrees(progress), false, strokePaint)
         // restore the canvas
         canvas.restore()
     }
@@ -133,7 +133,7 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
         // so that the text was exactly in the center
         val widths = FloatArray(message.length)
         digitPaint.getTextWidths(message, widths)
-        var advance = 0f
+        var advance = DEFAULT_TEXT_ADVANCE
         for (width in widths) advance += width
         // draw the text
         canvas.drawText(message, centerX - advance / 2, centerY  + advance / 4, digitPaint)
@@ -165,8 +165,8 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
         // paint for digits
         digitPaint = Paint().apply {
             style = Paint.Style.FILL_AND_STROKE
-            strokeWidth = 2f
-            setShadowLayer(5f, 0f, 0f, Color.DKGRAY)
+            strokeWidth = DEFAULT_DIGIT_STROKE_WIDTH
+            setShadowLayer(DEFAULT_SHADOW_LAYER_RADIUS, DEFAULT_SHADOW_LAYER_DX, DEFAULT_SHADOW_LAYER_DY, Color.DKGRAY)
             textSize = scaleSize
             typeface = Typeface.SANS_SERIF
             color = getPaintColor(progress)
@@ -195,5 +195,29 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
         private const val ORANGE_COLOR = "#fd8060"
         private const val YELLOW_COLOR = "#fee191"
         private const val GREEN_COLOR = "#b0d8a4"
+
+        // initial class values
+        private const val DEFAULT_DEF_STYLE_ATTRIBUTE = 0
+        private const val DEFAULT_DEF_STYLE_RESOURCE = 0
+
+        private const val DEFAULT_SIZE_DIVIDER = 2f
+
+        private const val UNSPECIFIED_MEASURE_DIMENSION = 300
+
+        private const val DEFAULT_OVAL_LEFT_COORDINATE = 0f
+        private const val DEFAULT_OVAL_TOP_COORDINATE = 0f
+
+        private const val DEFAULT_CENTER_CIRCLE_COORDINATE_X = 0f
+        private const val DEFAULT_CENTER_CIRCLE_COORDINATE_Y = 0f
+
+        private const val ARC_STARTING_ANGLE = -90f
+
+        private const val DEFAULT_TEXT_ADVANCE = 0f
+
+        private const val DEFAULT_DIGIT_STROKE_WIDTH = 2f
+
+        private const val DEFAULT_SHADOW_LAYER_RADIUS = 5f
+        private const val DEFAULT_SHADOW_LAYER_DX = 0f
+        private const val DEFAULT_SHADOW_LAYER_DY = 0f
     }
 }

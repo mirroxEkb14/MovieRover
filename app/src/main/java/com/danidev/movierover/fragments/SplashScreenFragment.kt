@@ -21,8 +21,12 @@ class SplashScreenFragment : Fragment() {
 
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController().navigate(R.id.action_splashScreenFragment_to_homeFragment)
-        }, 1000)
+        }, SPLASH_SCREEN_DELAY_MS)
 
         return view
+    }
+
+    companion object {
+        private const val SPLASH_SCREEN_DELAY_MS = 1000L
     }
 }

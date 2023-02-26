@@ -31,7 +31,7 @@ class DetailsFragment : Fragment() {
 
         // handle the transition
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            sharedElementEnterTransition = AutoTransition().setDuration(800L)
+            sharedElementEnterTransition = AutoTransition().setDuration(DEFAULT_TRANSITION_TIME)
         }
     }
 
@@ -110,5 +110,9 @@ class DetailsFragment : Fragment() {
             App.BUNDLE_TRANSITION_KEY
         )
         view?.findViewById<TextView>(R.id.details_description)?.text = film.description
+    }
+
+    companion object {
+        private const val DEFAULT_TRANSITION_TIME = 800L
     }
 }

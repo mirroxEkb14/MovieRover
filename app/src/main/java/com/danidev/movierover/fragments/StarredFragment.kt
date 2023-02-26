@@ -21,11 +21,6 @@ class StarredFragment : Fragment() {
 
     private lateinit var filmsAdapter: ItemListRecyclerAdapter
 
-    companion object {
-        var favoritesFilmBase: ArrayList<Item> = arrayListOf()
-        var saveStarredPositionLast = 0
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,7 +54,7 @@ class StarredFragment : Fragment() {
             layoutAnimation = anim
             scheduleLayoutAnimation()
 
-            val decorator = TopSpacingItemDecoration(8)
+            val decorator = TopSpacingItemDecoration(RV_DECORATOR_SPACING)
             addItemDecoration(decorator)
         }
         filmsAdapter.items = favoritesFilmBase
@@ -71,7 +66,7 @@ class StarredFragment : Fragment() {
         AnimationHelper.performFragmentCircularRevealAnimation(
             starredFragmentRoot,
             requireActivity(),
-            2
+            STARRED_FRAGMENT_POSITION
         )
     }
 
@@ -79,5 +74,13 @@ class StarredFragment : Fragment() {
         super.onPause()
         // save the element position from RV
         saveStarredPositionLast = (view?.findViewById<RecyclerView>(R.id.favorites_recycler)?.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+    }
+
+    companion object {
+        private const val RV_DECORATOR_SPACING = 8
+        private const val STARRED_FRAGMENT_POSITION = 2
+
+        var favoritesFilmBase: ArrayList<Item> = arrayListOf()
+        var saveStarredPositionLast = 0
     }
 }

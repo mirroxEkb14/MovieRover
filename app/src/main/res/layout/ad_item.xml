@@ -3,22 +3,22 @@
     android:id="@+id/ad_item_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="15dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginEnd="15dp"
+    android:layout_marginStart="@dimen/parent_margin_start"
+    android:layout_marginTop="@dimen/parent_margin_top"
+    android:layout_marginEnd="@dimen/parent_margin_end"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/ad_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="23sp"/>
+        android:textSize="@dimen/ad_text_size"/>
 
     <TextView
         android:id="@+id/ad_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="@dimen/ad_content_size"
         android:autoLink="web"
         android:focusable="true"
         android:clickable="true"/>

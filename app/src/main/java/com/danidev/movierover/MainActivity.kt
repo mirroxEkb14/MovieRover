@@ -23,11 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var navController: NavController
 
-    // an activity instance used to get access to its variables from fragments
-    companion object {
-        lateinit var activityInstance: MainActivity
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -122,5 +117,10 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Timber.d("onDestroy()")
+    }
+
+    // an activity instance used to get access to its variables from fragments
+    companion object {
+        lateinit var activityInstance: MainActivity
     }
 }

@@ -39,7 +39,7 @@ tools:visibility="visible" -> visible in this file for refactoring
                 android:background="@drawable/background_search_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"/>
+                android:layout_margin="@dimen/search_view_margin"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -49,7 +49,7 @@ tools:visibility="visible" -> visible in this file for refactoring
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/main_recycler_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/film_item"/>
 
