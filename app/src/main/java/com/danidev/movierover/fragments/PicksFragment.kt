@@ -30,7 +30,11 @@ class PicksFragment : Fragment() {
         AnimationHelper.performFragmentCircularRevealAnimation(
             picksFragmentRoot,
             requireActivity(),
-            4
+            PICKS_FRAGMENT_POSITION
         )
+    }
+
+    companion object {
+        private const val PICKS_FRAGMENT_POSITION = 4
     }
 }

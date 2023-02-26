@@ -30,7 +30,11 @@ class WatchLaterFragment : Fragment() {
         AnimationHelper.performFragmentCircularRevealAnimation(
             watchlaterFragmentRoot,
             requireActivity(),
-            3
+            WATCHLATER_FRAGMENT_POSITION
         )
+    }
+
+    companion object {
+        private const val WATCHLATER_FRAGMENT_POSITION = 3
     }
 }

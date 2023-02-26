@@ -12,7 +12,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/details_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/app_bar_height"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -20,7 +20,7 @@
             android:id="@+id/details_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="60dp"
+            android:minHeight="@dimen/tool_bar_min_height"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -34,7 +34,8 @@
                 android:scaleType="centerCrop"
                 android:background="@color/colorAccent"
                 android:src="@drawable/ic_launcher_foreground"
-                app:layout_collapseMode="parallax"/>
+                app:layout_collapseMode="parallax"
+                android:contentDescription="@string/details_poster_desc" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/details_toolbar"
@@ -50,8 +51,8 @@
         android:id="@+id/details_fab_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:borderWidth="0dp"
+        android:layout_margin="@dimen/fab_favorites_margin"
+        app:borderWidth="@dimen/fab_favorites_border_width"
         android:backgroundTint="@color/purple_500"
         app:layout_anchor="@id/details_app_bar"
         app:layout_anchorGravity="left|bottom"
@@ -63,7 +64,7 @@
         android:id="@+id/details_fab_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/fab_share_margin"
         app:backgroundTint="@color/purple_500"
         app:layout_anchor="@id/details_app_bar"
         app:layout_anchorGravity="bottom|right"
@@ -80,7 +81,7 @@
             android:id="@+id/details_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/details_desc_margin"
             tools:text="@tools:sample/lorem/random"/>
 
     </androidx.core.widget.NestedScrollView>

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/film_item_container"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:elevation="1dp"
-    app:cardCornerRadius="15dp">
+    android:layout_height="@dimen/film_container_height"
+    android:elevation="@dimen/film_container_elevation"
+    app:cardCornerRadius="@dimen/film_container_corner_radius">
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
 
         <ImageView
             android:id="@+id/poster"
-            android:layout_width="150dp"
+            android:layout_width="@dimen/poster_width"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:contentDescription="@string/film_item_image_desc"
@@ -24,10 +24,10 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/title_width"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:padding="8dp"
+            android:padding="@dimen/title_padding"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,9 +36,9 @@
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:padding="8dp"
+            android:layout_width="@dimen/description_width"
+            android:layout_height="@dimen/description_height"
+            android:padding="@dimen/description_padding"
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title"
@@ -49,11 +49,11 @@
 
     <com.danidev.movierover.customs.RatingDonutView
         android:id="@+id/rating_donut"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:translationZ="11dp"
-        app:stroke="10"
-        app:progress="77"
+        android:layout_width="@dimen/rating_donut_width"
+        android:layout_height="@dimen/rating_donut_height"
+        android:translationZ="@dimen/rating_donut_transition_z"
+        app:stroke="@dimen/rating_donut_stroke"
+        app:progress="@dimen/rating_donut_progress"
         android:layout_gravity="bottom|start"
         android:stateListAnimator="@animator/donut_animator"
         app:layout_constraintTop_toTopOf="parent"
