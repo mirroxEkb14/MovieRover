@@ -8,7 +8,7 @@
     android:background="@drawable/starred_background"
     android:visibility="invisible"
     tools:visibility="visible"
-    tools:context=".StarredFragment">
+    tools:context=".fragments.StarredFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favorites_recycler"

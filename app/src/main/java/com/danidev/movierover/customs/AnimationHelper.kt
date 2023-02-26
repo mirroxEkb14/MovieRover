@@ -1,4 +1,4 @@
-package com.danidev.movierover
+package com.danidev.movierover.customs
 
 import android.app.Activity
 import android.view.View

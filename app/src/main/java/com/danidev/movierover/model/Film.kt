@@ -13,6 +13,7 @@ data class Film(
     val title: String,
     @DrawableRes val poster: Int, // image id from 'resources'
     val description: String,
+    var rating: Float = 0f,
     var isInFavorites: Boolean = false
 ): Parcelable, Item {
 }

@@ -1,4 +1,4 @@
-package com.danidev.movierover
+package com.danidev.movierover.fragments
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -9,7 +9,6 @@ import android.transition.AutoTransition
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
@@ -17,6 +16,8 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
+import com.danidev.movierover.App
+import com.danidev.movierover.R
 import com.danidev.movierover.model.Film
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -105,7 +106,9 @@ class DetailsFragment : Fragment() {
                 .centerCrop()
                 .into(this)
         }
-        view?.findViewById<CoordinatorLayout>(R.id.details_fragment_root)?.transitionName = arguments?.getString(App.BUNDLE_TRANSITION_KEY)
+        view?.findViewById<CoordinatorLayout>(R.id.details_fragment_root)?.transitionName = arguments?.getString(
+            App.BUNDLE_TRANSITION_KEY
+        )
         view?.findViewById<TextView>(R.id.details_description)?.text = film.description
     }
 }

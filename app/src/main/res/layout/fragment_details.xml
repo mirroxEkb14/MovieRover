@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
     android:background="@drawable/details_background"
-    tools:context=".DetailsFragment">
+    tools:context=".fragments.DetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/details_app_bar"

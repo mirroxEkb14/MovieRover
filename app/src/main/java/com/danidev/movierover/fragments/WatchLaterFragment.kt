@@ -1,4 +1,4 @@
-package com.danidev.movierover
+package com.danidev.movierover.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.danidev.movierover.customs.AnimationHelper
+import com.danidev.movierover.R
 
 class WatchLaterFragment : Fragment() {
 
@@ -25,6 +27,10 @@ class WatchLaterFragment : Fragment() {
 
     private fun animateFragmentAppearance() {
         val watchlaterFragmentRoot = requireView().findViewById<FrameLayout>(R.id.watchlater_fragment_root)
-        AnimationHelper.performFragmentCircularRevealAnimation(watchlaterFragmentRoot, requireActivity(), 3)
+        AnimationHelper.performFragmentCircularRevealAnimation(
+            watchlaterFragmentRoot,
+            requireActivity(),
+            3
+        )
     }
 }
