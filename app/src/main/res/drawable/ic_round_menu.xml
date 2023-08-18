@@ -1,3 +1,5 @@
+<!-- This drawable resource file is used in MainActivity to setup a NavigationIcon when navigating
+from DetailsFragment back to HomeFragment-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Animation for each RecyclerView element in Starred Fragment. Used in
+     recyclerview_favorites_layout_animator. -->
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="500">
     <translate

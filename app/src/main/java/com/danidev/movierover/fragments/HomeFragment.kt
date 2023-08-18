@@ -25,14 +25,45 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 import kotlin.collections.ArrayList
 
+/**
+ * This class represents the fragment of Starred display.
+ *
+ * [Fragment] is a part of the user interface, has its own life cycle and also its own event handler.
+ * Fragments are designed to solve the problem of content placement on large screens - at that time
+ * began to appear tablets. Since the tablet has a much larger screen than the phone, therefore, the
+ * content should fit more. Before the Fragments, this could be solved with a different layout, that
+ * is, each element of the UI had to be represented according to a large screen. And if it was needed
+ * to open up, for example, the list and the contents of the list, it was also needed to run two
+ * Activites and configure the complex interaction between them. With the help of a Fragment, as many
+ * Fragments as it is needed can be opened and easily exchanged information between them.
+ */
 class HomeFragment : Fragment() {
 
     private lateinit var filmsAdapter: ItemListRecyclerAdapter
+
+    /** Value represents a list with all the movies contained in [RecyclerView]. */
     private lateinit var filmsDataBase: ArrayList<Item>
 
-    // how much time passed from the first click
+    /** Value represents how much time passed from the first click. */
     private var backPressedTime = 0L
 
+    /**
+     * Inflates the layout.
+     *
+     * About [LayoutInflater]: using [android.content.Context] class object it is possible to create
+     * a graphical object from an XML markup file. Activity is inherited from [android.content.Context],
+     * so [getLayoutInflater] can be called. Now, it is possible to call [LayoutInflater.inflate]
+     * method, which provides a [View] object from the specified XML layout file. This
+     * [LayoutInflater.inflate] method returns [View]. A `resource` argument is responsible for link to
+     * an XML markup file. The second `root` argument is responsible for a parent container. Last
+     * `attachToRoot` argument asks: «It is needed to add newly created [View] to the container?».
+     * Eventually, there's the following formula for this method: `inflate(<R.layout.X>, <Container>, <true / false>)`,
+     * where X is the name of the markup file.
+     *
+     * @param inflater is [LayoutInflater] object that is used to inflate this [View] in the fragment.
+     * @param savedInstanceState is a mapping from [String] keys to various `Parcelable` values. If
+     * non-null, this Fragment is being re-constructed from a previous saved state as given here.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,12 +71,32 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    /**
+     * Performs initial creation of this Fragment.
+     *
+     * @param savedInstanceState is the Fragment state, if this Fragment is being re-created from a
+     * previous saved state.
+     *
+     * @see onBackPressedCallback
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         onBackPressedCallback()
     }
 
+    /**
+     * Initializes navigation, [RecyclerView], [SearchView] and animates the Fragment's appearance.
+     *
+     * @param view is [View] returned by [onCreateView].
+     * @param savedInstanceState is the state if non-null. That means this Fragment is being
+     * re-constructed from a previous saved state as given here.
+     *
+     * @see showNavigation
+     * @see initRecyclerView
+     * @see setupSearchView
+     * @see animateFragmentAppearance
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,7 +106,13 @@ class HomeFragment : Fragment() {
         animateFragmentAppearance()
     }
 
+    /**
+     * Initializes [RecyclerView].
+     */
     private fun initRecyclerView() {
+        /**
+         * Fills the movie database (list) with [Film]s and [Ad]s.
+         */
         fun getFilms(): ArrayList<Item> {
             return arrayListOf(
                 Film(1, "The Chronicles of Narnia", R.drawable.the_chronicles_of_narnia, "Four kids travel through a wardrobe to the land of Narnia and learn of their destiny to free it with the guidance of a mystical lion.", 6.9f),
@@ -102,21 +159,49 @@ class HomeFragment : Fragment() {
         filmsAdapter.items = filmsDataBase
     }
 
+    /**
+     * Sets [SearchView.setIconified] to false for the user to be able to click everywhere in SearchView,
+     * not only on the lope. After, calls [SearchView.clearFocus] for the keyboard not to pop up
+     * automatically at the app start. Then, connects the listener of changes of the entered text in \
+     * the search.
+     */
     private fun setupSearchView() {
         view?.findViewById<SearchView>(R.id.search_view).apply {
-            this?.isIconified = false // now the user can click everywhere in SearchView, not only on the lope
-            this?.clearFocus() // the keyboard not to pop up automatically at the app start
-            this?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return true
-                }
+            this?.isIconified = false
+            this?.clearFocus()
+            this?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+                /**
+                 * Is called while pressing the "search" button on the keyboard.
+                 *
+                 * @param query the query text that is to be submitted.
+                 *
+                 * @return `true` if the query has been handled by the listener, `false` to let the
+                 * [SearchView] perform the default action.
+                 */
+                override fun onQueryTextSubmit(query: String?): Boolean { return true }
+
+                /**
+                 * Is called on every text change.
+                 *
+                 * If the input is empty, inserts the entire database into the adapter. Then, filters
+                 * the list to find the right combinations. After, in order for everything to work
+                 * correctly, it is needed both a query and a film name to normalize to lowercase.
+                 * In the end, adds to the adapter.
+                 *
+                 * @param newText the new content of the query text field.
+                 *
+                 * @return `false` if the [SearchView] should perform the default action (showing any
+                 * suggestions if available), `true` if the action was handled by the listener.
+                 */
                 override fun onQueryTextChange(newText: String?): Boolean {
                     if (newText!!.isEmpty()) {
                         filmsAdapter.updateDataInefficient(filmsDataBase)
                         return true
                     }
                     val result = filmsDataBase.filter {
-                        it is Film && it.title.lowercase(Locale.getDefault()).contains(newText.lowercase(Locale.getDefault()))
+                        it is Film && it.title.lowercase(
+                            Locale.getDefault()).contains(newText.lowercase(Locale.getDefault()))
                     }
                     filmsAdapter.updateDataInefficient(result)
                     return true
@@ -126,53 +211,78 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * Create a bundle that contains information about the movie user clicked on
+     * Creates and returns a bundle that contains information about the movie the user clicked on.
      *
-     * @param film              Film instance from RV
-     * @param filmContainer     Film container
+     * Puts the [Film] in a 'parcel'. Then, sends `transitionName` of the current [android.widget.ImageView].
+     *
+     * @param film is [Film] object from [RecyclerView].
+     * @param filmContainer is [Film] container.
+     *
+     * @return newly created [Bundle].
      */
     fun getHomeFragmentBundle(film: Film, filmContainer: CardView): Bundle {
         return Bundle().apply {
-            putParcelable(App.BUNDLE_ITEM_KEY, film) // put the Film in a 'parcel'
-            putString(App.BUNDLE_TRANSITION_KEY, filmContainer.transitionName) // send transitionName of the current imageView
+            putParcelable(App.BUNDLE_ITEM_KEY, film)
+            putString(App.BUNDLE_TRANSITION_KEY, filmContainer.transitionName)
         }
     }
 
+    /**
+     * Animates this fragment's appearance.
+     */
     private fun animateFragmentAppearance() {
         val homeFragmentRoot = requireView().findViewById<CoordinatorLayout>(R.id.home_fragment_root)
         AnimationHelper.performFragmentCircularRevealAnimation(
             homeFragmentRoot,
             requireActivity(),
-            1
+            ANIMATION_POSITION
         )
     }
 
-    // double tap for exit the app
+    /**
+     * Implements logic of double tap to exit the app.
+     */
     private fun onBackPressedCallback() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             if (backPressedTime + App.TIME_INTERVAL > System.currentTimeMillis()) {
                 isEnabled = false
                 requireActivity().onBackPressedDispatcher.onBackPressed()
             } else {
-                Toast.makeText(requireActivity(), "Double tap for exit", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), TOAST_TEXT, Toast.LENGTH_SHORT).show()
             }
             backPressedTime = System.currentTimeMillis()
         }
     }
 
-    // set the visibility of Toolbar and BottomNavigation to VISIBLE after Splash Screen
+    /**
+     * Sets the visibility of [AppBarLayout] and [BottomNavigationView] to [View.VISIBLE] after the
+     * Splash Screen.
+     */
     private fun showNavigation() {
         MainActivity.activityInstance.findViewById<AppBarLayout>(R.id.app_bar_layout).visibility = View.VISIBLE
         MainActivity.activityInstance.findViewById<BottomNavigationView>(R.id.bottom_navigation).visibility = View.VISIBLE
     }
 
+    /**
+     * Is called when the Fragment is no longer resumed.
+     *
+     * Saves the element position from [RecyclerView].
+     */
     override fun onPause() {
         super.onPause()
-        // save the element position from RV
-        saveHomePositionLast = (view?.findViewById<RecyclerView>(R.id.main_recycler)?.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+        saveHomePositionLast = (view?.findViewById<RecyclerView>(R.id.main_recycler)?.layoutManager
+                as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
     }
 
     companion object {
+        /** Value contains the position of [RecyclerView] last saved. */
         var saveHomePositionLast = 0
+
+        /** Value represents a position in the navigation menu for the manifestation circle to
+         * diverge from the icon of the navigation menu. */
+        private const val ANIMATION_POSITION = 1
+
+        /** Value represents a text for [Toast] message that is used in [onBackPressedCallback]. */
+        private const val TOAST_TEXT = "Double tap for exit"
     }
 }

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This drawable resource file is used in fragment_watch_later.xml as a background gradient for the
+Watch Later screen.-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient android:startColor="@android:color/holo_red_dark"
         android:endColor="@android:color/holo_orange_dark"

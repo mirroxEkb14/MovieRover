@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- XML is a document markup language. It allows to store information in a user-friendly format. XML
+can be used for application data to communicate with the server part, or to store any user settings
+on the device. XML is ideal for describing user interface of mobile applications.
+
+dp are special units that allow to create interfaces adapted to different devices. There is a formula:
+px = dp * (dpi / 160), where dpi - is the pixel density of this device.
+.-->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,7 +29,7 @@
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/page_title"
+            app:title="@string/top_app_bar_title"
             app:navigationIcon="@drawable/ic_round_menu"
             app:menu="@menu/top_toolbar"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"/>
@@ -33,7 +40,7 @@
         android:id="@+id/fragment_placeholder"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/home_fragment_height"
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation"
         app:layout_constraintTop_toBottomOf="@+id/app_bar_layout"
