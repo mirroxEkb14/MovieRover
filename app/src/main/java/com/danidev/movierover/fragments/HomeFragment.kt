@@ -285,5 +285,12 @@ class HomeFragment : Fragment() {
 
         /** Value represents a text for [Toast] message that is used in [onBackPressedCallback]. */
         private const val TOAST_TEXT = "Double tap for exit"
+
+        /** The following **_two_** constants represent max recycled [View]s for a [RecyclerView]*/
+        private const val RV_MAX_AD_ITEMS = 2
+        private const val RV_MAX_FILM_ITEMS = 8
+
+        /** Value represents padding in *dp* for a [RecyclerView] */
+        private const val RV_DECORATOR_SPACING = 8
     }
 }

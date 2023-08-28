@@ -23,6 +23,7 @@
     <!-- fragment_details.xml -->
     <string name="floating_action_btn_share_text">Поделиться</string>
     <string name="floating_action_btn_favorites_text">Избранное</string>
+    <string name="details_poster_desc">Постер деталей</string>
     <!-- fragment_splash_screen.xml -->
     <string name="splash_fragment_text">Добро пожаловать!</string>
 </resources>
