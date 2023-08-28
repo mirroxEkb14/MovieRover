@@ -139,7 +139,8 @@ class HomeFragment : Fragment() {
                     val filmContainer = findViewById<CardView>(R.id.film_item_container)
                     val extras = FragmentNavigatorExtras(filmContainer to filmContainer.transitionName)
                     val argsBundle = getHomeFragmentBundle(film, filmContainer)
-                    (activity as MainActivity).navController.navigate(R.id.action_homeFragment_to_detailsFragment, argsBundle, null, extras)
+                    (activity as MainActivity).navController.navigate(
+                        R.id.action_homeFragment_to_detailsFragment, argsBundle, null, extras)
                 }
             })
 

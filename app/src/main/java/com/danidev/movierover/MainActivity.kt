@@ -114,6 +114,9 @@ class MainActivity : AppCompatActivity() {
      * Setups [BottomNavigationView] and sets top [Toolbar] as a support [androidx.appcompat.app.ActionBar].
      */
     private fun setupNavigation() {
+        /**
+         * Initializes Bottom Navigation.
+         */
         fun initBottomNavigation() {
             val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
             bottomNavigation.setupWithNavController(navController)

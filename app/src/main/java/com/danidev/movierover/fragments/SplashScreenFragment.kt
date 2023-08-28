@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.danidev.movierover.R
 
@@ -31,9 +32,12 @@ class SplashScreenFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_splash_screen, container, false)
 
-        Handler(Looper.myLooper()!!).postDelayed({
+//        Handler(Looper.myLooper()!!).postDelayed({
+//            findNavController().navigate(R.id.action_splashScreenFragment_to_homeFragment)
+//        }, MILLIS_DELAY)
+        lifecycleScope.launchWhenResumed {
             findNavController().navigate(R.id.action_splashScreenFragment_to_homeFragment)
-        }, MILLIS_DELAY)
+        }
 
         return view
     }
