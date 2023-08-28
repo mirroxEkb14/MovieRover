@@ -1,3 +1,4 @@
+<!-- This xml file contains themes and styles for this application. -->
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.MovieRover" parent="Theme.MaterialComponents.Light.NoActionBar">

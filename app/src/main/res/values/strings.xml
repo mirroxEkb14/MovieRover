@@ -1,27 +1,27 @@
+<!-- This xml file contains string values in English used in this project. -->
 <resources>
+    <!-- AndroidManifest.xml -->
     <string name="app_name">MovieRover</string>
-
-    <!--home screen start-->
-    <string name="page_title">Search it!</string>
-
+    <!--activity_main.xml-->
+    <string name="top_app_bar_title">Search it!</string>
+    <!-- MainActivity.xml as a Top App Bar message.-->
     <string name="app_bar_layout_text">Someday there will be a navigation here…</string>
-
-    <string name="film_item_image_desc">Poster</string>
-
+    <!-- film_item.xml -->
+    <string name="film_item_poster_desc">Poster</string>
+    <string name="film_item_title_text">Title</string>
+    <!-- navigation_menu.xml and navigation.xml -->
     <string name="menu_home">Home</string>
     <string name="menu_starred_title">Starred</string>
     <string name="menu_watch_later_title">Watch later</string>
     <string name="menu_picks_title">Picks</string>
+    <!-- navigation.xml -->
     <string name="menu_details_title">Details</string>
+    <!-- top_toolbar.xml -->
     <string name="menu_search_title">Search</string>
     <string name="menu_more_title">More</string>
-
+    <!-- fragment_details.xml -->
     <string name="floating_action_btn_share_text">Share</string>
     <string name="floating_action_btn_favorites_text">Favorites</string>
+    <!-- fragment_splash_screen.xml -->
     <string name="splash_fragment_text">Welcome!</string>
-    <!--home screen end-->
-
-    <!-- fragment details start -->
-    <string name="details_poster_desc">Details Poster</string>
-    <!-- fragment details end -->
 </resources>

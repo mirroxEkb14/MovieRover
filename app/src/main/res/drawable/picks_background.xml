@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This drawable resource file is used in fragment_picls.xml as a background gradient for the Picks
+screen. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient android:startColor="@android:color/holo_blue_dark"
         android:endColor="@android:color/holo_red_light"

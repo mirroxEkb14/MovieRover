@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This layout resource file is used in FilmDelegateAdapter and is to be inflated. -->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +8,23 @@
     android:layout_height="@dimen/film_container_height"
     android:elevation="@dimen/film_container_elevation"
     app:cardCornerRadius="@dimen/film_container_corner_radius">
+
+    <!-- For the "progress" should be used a dimen value of "@dimen/film_rating_donut_progress", but
+    the app throws java.lang.NumberFormatException: Caused by: For input string: "77.0"; the app runs
+    without thia error only by hardcoding
+    -->
+    <com.danidev.movierover.customs.RatingDonutView
+        android:id="@+id/rating_donut"
+        android:layout_width="@dimen/film_rating_donut_width"
+        android:layout_height="@dimen/film_rating_donut_height"
+        android:translationZ="@dimen/film_rating_donut_translation_z"
+        app:stroke="@dimen/film_rating_donut_stroke"
+        app:progress="77"
+        android:layout_gravity="bottom|start"
+        android:stateListAnimator="@animator/donut_animator"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,31 +32,31 @@
 
         <ImageView
             android:id="@+id/poster"
-            android:layout_width="@dimen/poster_width"
+            android:layout_width="@dimen/film_poster_width"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:contentDescription="@string/film_item_image_desc"
+            android:contentDescription="@string/film_item_poster_desc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars"/>
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="@dimen/title_width"
+            android:layout_width="@dimen/film_title_width"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:padding="@dimen/title_padding"
+            android:padding="@dimen/film_title_padding"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Title"/>
+            tools:text="@string/film_item_title_text"/>
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="@dimen/description_width"
-            android:layout_height="@dimen/description_height"
-            android:padding="@dimen/description_padding"
+            android:layout_width="@dimen/film_description_width"
+            android:layout_height="@dimen/film_description_height"
+            android:padding="@dimen/film_description_padding"
             app:layout_constraintStart_toEndOf="@+id/poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title"
@@ -46,18 +64,5 @@
             tools:text="@tools:sample/lorem/random"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.danidev.movierover.customs.RatingDonutView
-        android:id="@+id/rating_donut"
-        android:layout_width="@dimen/rating_donut_width"
-        android:layout_height="@dimen/rating_donut_height"
-        android:translationZ="@dimen/rating_donut_transition_z"
-        app:stroke="@dimen/rating_donut_stroke"
-        app:progress="@dimen/rating_donut_progress"
-        android:layout_gravity="bottom|start"
-        android:stateListAnimator="@animator/donut_animator"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
+x
 </androidx.cardview.widget.CardView>

@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This xml file contains string values in Russion used in this project. -->
 <resources>
+    <!-- AndroidManifest.xml -->
     <string name="app_name">MovieRover</string>
-    <string name="page_title">Искать!</string>
-    <string name="menu_picks_title">Подборки</string>
-    <string name="menu_watch_later_title">Посмотреть позже</string>
+    <!--activity_main.xml-->
+    <string name="top_app_bar_title">Искать!</string>
+    <!-- MainActivity.xml as a Top App Bar message.-->
     <string name="app_bar_layout_text">Когда-нибудь здесь будет навигация…</string>
+    <!-- film_item.xml -->
+    <string name="film_item_poster_desc">Постер</string>
+    <string name="film_item_title_text">Заголовок</string>
+    <!-- navigation_menu.xml and navigation.xml -->
+    <string name="menu_home">Домой</string>
+    <string name="menu_starred_title">Избранное</string>
+    <string name="menu_watch_later_title">Посмотреть позже</string>
+    <string name="menu_picks_title">Подборки</string>
+    <!-- navigation.xml -->
+    <string name="menu_details_title">Подробнее</string>
+    <!-- top_toolbar.xml -->
     <string name="menu_search_title">Поиск</string>
     <string name="menu_more_title">Дальше</string>
-    <string name="film_item_image_desc">Постер</string>
+    <!-- fragment_details.xml -->
     <string name="floating_action_btn_share_text">Поделиться</string>
     <string name="floating_action_btn_favorites_text">Избранное</string>
-    <string name="menu_home">Домой</string>
-    <string name="menu_details_title">Подробнее</string>
-    <string name="menu_starred_title">Избранное</string>
+    <!-- fragment_splash_screen.xml -->
     <string name="splash_fragment_text">Добро пожаловать!</string>
 </resources>

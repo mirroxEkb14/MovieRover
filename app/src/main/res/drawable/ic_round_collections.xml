@@ -1,3 +1,5 @@
+<!-- This drawable resource file is used in MainActivity as an icon for a Toolbar that appears after
+ clicking on Burger Menu. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"

@@ -1,7 +1,7 @@
-<!--
+<!-- This layout resource file is used in HomeFragment and is to be inflated.
+
 android:visibility="invisible" -> invisible when created
-tools:visibility="visible" -> visible in this file for refactoring
--->
+tools:visibility="visible" -> visible in this file for refactoring -->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -39,7 +39,7 @@ tools:visibility="visible" -> visible in this file for refactoring
                 android:background="@drawable/background_search_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/search_view_margin"/>
+                android:layout_margin="@dimen/fragment_home_toolbar_layout_margin"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -49,7 +49,7 @@ tools:visibility="visible" -> visible in this file for refactoring
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/main_recycler_margin"
+        android:layout_margin="@dimen/fragment_home_recycler_view_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/film_item"/>
 

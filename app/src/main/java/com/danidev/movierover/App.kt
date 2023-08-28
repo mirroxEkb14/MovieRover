@@ -5,41 +5,69 @@ import android.content.res.Configuration
 import timber.log.Timber
 
 /**
- * Performs logic that must be done before the first Activity is launched.
- * Allows containing global variables and constants.
+ * This Application Class is the core class in an Android application that stores all the components,
+ * all the Activites, services, providers and other broadcasts.
+ *
+ * Performs logic that must be done before the first [android.app.Activity] is launched. Allows
+ * containing global variables and constants.
  */
 class App : Application() {
 
+    /**
+     * Is called when the application starts before other application components are created. This
+     * method must not be overridden, but it is the best place to initialize global objects.
+     */
     override fun onCreate() {
         super.onCreate()
 
-        // the version is for development
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
     }
 
-    override fun onConfigurationChanged ( newConfig : Configuration) {
+    /**
+     * Is called by the system when the device configuration changes.
+     *
+     * @param newConfig is the new device configuration.
+     */
+    override fun onConfigurationChanged (newConfig : Configuration) {
         super.onConfigurationChanged(newConfig)
-        Timber.d("onConfigurationChanged()")
+        Timber.d(CONFIGURATION_LOG)
+    }
+
+    /**
+     * Is called when the system has little RAM and the system needs other running applications to
+     * slow down.
+     *
+     * Redefinition is not required.
+     */
+    override fun onLowMemory() {
+        super.onLowMemory()
     }
 
     companion object {
-        // a key for launching DetailsFragment
+        /** Value is a key for launching [com.danidev.movierover.fragments.DetailsFragment]. */
         const val BUNDLE_ITEM_KEY = "film"
 
-        // a key for setting transitionName to the poster in DetailsFragment
+        /** Value is a key for setting `transitionName` to the poster in
+         * [com.danidev.movierover.fragments.DetailsFragment]. */
         const val BUNDLE_TRANSITION_KEY = "transitionName"
 
-        // during this time a user must click the back button for the second time to exit the app
-        // in ms
+        /** Value represents time, during which a user must click the back button for the second time
+         * to exit the application in ms. */
         const val TIME_INTERVAL = 2000
 
-        // movie poster of RV element that was clicked
+        /** Value represents a log/debug message for the moment, when the device configuration is
+         * changed. */
+        private const val CONFIGURATION_LOG = "onConfigurationChanged()"
+
+        /** Value represents a movie poster of [androidx.recyclerview.widget.RecyclerView] element
+         * that was clicked on. */
         var currentDetailsPoster: Int? = null
 
-        // represents the amount of elements in the RV
-        // used for setting a different transitionName to each poster in the RV
+        /** Value represents the amount of elements in the [androidx.recyclerview.widget.RecyclerView].
+         * Used for setting a different `transitionName` to each poster in the
+         * [androidx.recyclerview.widget.RecyclerView]*/
         var rvItemsCounter = 1
     }
 }
