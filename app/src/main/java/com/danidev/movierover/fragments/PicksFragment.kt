@@ -60,4 +60,8 @@ class PicksFragment : Fragment() {
             animationPosition
         )
     }
+
+    companion object {
+        private const val PICKS_FRAGMENT_POSITION = 4
+    }
 }

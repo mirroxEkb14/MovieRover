@@ -169,4 +169,9 @@ class MainActivity : AppCompatActivity() {
         private const val STOP_LOG_MESSAGE = "onStop()"
         private const val DESTROY_LOG_MESSAGE = "onDestroy()"
     }
+
+    // an activity instance used to get access to its variables from fragments
+    companion object {
+        lateinit var activityInstance: MainActivity
+    }
 }

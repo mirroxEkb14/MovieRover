@@ -60,4 +60,8 @@ class WatchLaterFragment : Fragment() {
             animationPosition
         )
     }
+
+    companion object {
+        private const val WATCHLATER_FRAGMENT_POSITION = 3
+    }
 }

@@ -147,14 +147,14 @@ class HomeFragment : Fragment() {
             adapter = filmsAdapter
             layoutManager = LinearLayoutManager(requireActivity())
 
-            recycledViewPool.setMaxRecycledViews(R.id.ad_item_container, 2)
-            recycledViewPool.setMaxRecycledViews(R.id.film_item_container, 8)
+            recycledViewPool.setMaxRecycledViews(R.id.ad_item_container, RV_MAX_AD_ITEMS)
+            recycledViewPool.setMaxRecycledViews(R.id.film_item_container, RV_MAX_FILM_ITEMS)
 
             scrollToPosition(saveHomePositionLast)
 
             PagerSnapHelper().attachToRecyclerView(this)
 
-            val decorator = TopSpacingItemDecoration(8)
+            val decorator = TopSpacingItemDecoration(RV_DECORATOR_SPACING)
             addItemDecoration(decorator)
         }
         filmsAdapter.items = filmsDataBase

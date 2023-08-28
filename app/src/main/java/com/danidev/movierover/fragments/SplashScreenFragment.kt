@@ -41,4 +41,8 @@ class SplashScreenFragment : Fragment() {
 
         return view
     }
+
+    companion object {
+        private const val SPLASH_SCREEN_DELAY_MS = 1000L
+    }
 }
