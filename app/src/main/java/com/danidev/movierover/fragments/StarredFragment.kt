@@ -128,12 +128,4 @@ class StarredFragment : Fragment() {
         /** Value contains a position where to scroll to in [RecyclerView]. */
         var saveStarredPositionLast = 0
     }
-
-    companion object {
-        private const val RV_DECORATOR_SPACING = 8
-        private const val STARRED_FRAGMENT_POSITION = 2
-
-        var favoritesFilmBase: ArrayList<Item> = arrayListOf()
-        var saveStarredPositionLast = 0
-    }
 }
