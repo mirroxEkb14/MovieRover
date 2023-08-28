@@ -8,6 +8,23 @@
     android:layout_height="@dimen/film_container_height"
     android:elevation="@dimen/film_container_elevation"
     app:cardCornerRadius="@dimen/film_container_corner_radius">
+
+    <!-- For the "progress" should be used a dimen value of "@dimen/film_rating_donut_progress", but
+    the app throws java.lang.NumberFormatException: Caused by: For input string: "77.0"; the app runs
+    without thia error only by hardcoding
+    -->
+    <com.danidev.movierover.customs.RatingDonutView
+        android:id="@+id/rating_donut"
+        android:layout_width="@dimen/film_rating_donut_width"
+        android:layout_height="@dimen/film_rating_donut_height"
+        android:translationZ="@dimen/film_rating_donut_translation_z"
+        app:stroke="@dimen/film_rating_donut_stroke"
+        app:progress="77"
+        android:layout_gravity="bottom|start"
+        android:stateListAnimator="@animator/donut_animator"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -47,18 +64,5 @@
             tools:text="@tools:sample/lorem/random"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.danidev.movierover.customs.RatingDonutView
-        android:id="@+id/rating_donut"
-        android:layout_width="@dimen/film_rating_donut_width"
-        android:layout_height="@dimen/film_rating_donut_height"
-        android:translationZ="@dimen/film_rating_donut_translation_z"
-        app:stroke="@dimen/film_rating_donut_stroke"
-        app:progress="@dimen/film_rating_donut_progress"
-        android:layout_gravity="bottom|start"
-        android:stateListAnimator="@animator/donut_animator"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.cardview.widget.CardView>
